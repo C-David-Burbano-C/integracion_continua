@@ -1,0 +1,266 @@
+{
+  "info": {
+    "name": "Colegio Mentes Creativas - API Tests",
+    "description": "Colección de pruebas para la aplicación educativa del Colegio Mentes Creativas",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "Application Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            },
+            "description": "Verificar que la aplicación esté funcionando correctamente"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Navigation Tests",
+      "item": [
+        {
+          "name": "Home Page",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/",
+              "host": ["{{base_url}}"],
+              "path": [""]
+            },
+            "description": "Acceder a la página principal"
+          },
+          "response": []
+        },
+        {
+          "name": "Matemáticas Page",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/matematicas",
+              "host": ["{{base_url}}"],
+              "path": ["matematicas"]
+            },
+            "description": "Acceder a la página de matemáticas"
+          },
+          "response": []
+        },
+        {
+          "name": "Ciencias Naturales Page",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/ciencias-naturales",
+              "host": ["{{base_url}}"],
+              "path": ["ciencias-naturales"]
+            },
+            "description": "Acceder a la página de ciencias naturales"
+          },
+          "response": []
+        },
+        {
+          "name": "Pensamiento Lógico Page",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/pensamiento-logico",
+              "host": ["{{base_url}}"],
+              "path": ["pensamiento-logico"]
+            },
+            "description": "Acceder a la página de pensamiento lógico"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Quiz API Tests",
+      "item": [
+        {
+          "name": "Get Quiz Questions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/quiz/matematicas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "quiz", "matematicas"]
+            },
+            "description": "Obtener preguntas del quiz de matemáticas"
+          },
+          "response": []
+        },
+        {
+          "name": "Submit Quiz Answer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"questionId\": 1,\n  \"answer\": \"42\",\n  \"subject\": \"matematicas\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/quiz/submit",
+              "host": ["{{base_url}}"],
+              "path": ["api", "quiz", "submit"]
+            },
+            "description": "Enviar respuesta del quiz"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Quiz Results",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/quiz/results/matematicas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "quiz", "results", "matematicas"]
+            },
+            "description": "Obtener resultados del quiz"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Score Management",
+      "item": [
+        {
+          "name": "Get User Score",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/score",
+              "host": ["{{base_url}}"],
+              "path": ["api", "score"]
+            },
+            "description": "Obtener puntuación del usuario"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Score",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subject\": \"matematicas\",\n  \"points\": 10,\n  \"correct\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/score/update",
+              "host": ["{{base_url}}"],
+              "path": ["api", "score", "update"]
+            },
+            "description": "Actualizar puntuación del usuario"
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Score",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/score/reset",
+              "host": ["{{base_url}}"],
+              "path": ["api", "score", "reset"]
+            },
+            "description": "Reiniciar puntuación del usuario"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Multimedia Resources",
+      "item": [
+        {
+          "name": "Get Multimedia Content",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/multimedia/matematicas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "multimedia", "matematicas"]
+            },
+            "description": "Obtener recursos multimedia para matemáticas"
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Multimedia Resource",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "subject",
+                  "value": "matematicas",
+                  "type": "text"
+                },
+                {
+                  "key": "type",
+                  "value": "video",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/multimedia/upload",
+              "host": ["{{base_url}}"],
+              "path": ["api", "multimedia", "upload"]
+            },
+            "description": "Subir recurso multimedia"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5173",
+      "type": "string"
+    }
+  ]
+}

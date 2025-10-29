@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { FaHome, FaCube, FaColumns, FaMicrophone, FaShapes, FaCalculator, FaRuler, FaKey, FaMouse, FaList } from "react-icons/fa";
+﻿import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { FaCalculator, FaLeaf, FaBrain, FaHome } from 'react-icons/fa';
 
 interface SidebarItem {
   label: string;
@@ -9,24 +9,14 @@ interface SidebarItem {
 }
 
 const mainItems: SidebarItem[] = [
-  { label: "Inicio", route: "/", icon: <FaHome /> },
-  { label: "Three.js Demo", route: "/three", icon: <FaCube /> },
-  { label: "Responsive Layouts", route: "/layouts", icon: <FaColumns /> },
-  { label: "Text-to-Speech", route: "/tts", icon: <FaMicrophone /> },
-  { label: "Figuras Geometricas", route: "/three_2", icon: <FaShapes /> },
-];
-
-const exerciseItems: SidebarItem[] = [
-  { label: "Tablas de Multiplicar", route: "/tablasmul", icon: <FaCalculator /> },
-  { label: "Conversor de Unidades", route: "/conversorunid", icon: <FaRuler /> },
-  { label: "Validadador de Contraseñas", route: "/validcontrasena", icon: <FaKey /> },
-  { label: "Contador de Clics con Almacenamiento", route: "/contadorclics", icon: <FaMouse /> },
-  { label: "Lista de Tareas", route: "/listareas", icon: <FaList /> },
+  { label: 'Inicio', route: '/', icon: <FaHome /> },
+  { label: 'Matemáticas', route: '/matematicas', icon: <FaCalculator /> },
+  { label: 'Ciencias Naturales', route: '/ciencias-naturales', icon: <FaLeaf /> },
+  { label: 'Pensamiento Lógico', route: '/pensamiento-logico', icon: <FaBrain /> },
 ];
 
 export default function Sidebar() {
-  const [openMain, setOpenMain] = useState(false);
-  const [openExercises, setOpenExercises] = useState(false);
+  const [openMain, setOpenMain] = useState(true);
 
   const renderNavItem = ({ label, route, icon }: SidebarItem) => (
     <NavLink
@@ -35,39 +25,25 @@ export default function Sidebar() {
       className={({ isActive }) =>
         `w-full text-left flex items-center gap-2 justify-between rounded-lg px-3 py-2 text-slate-700 dark:text-slate-300 
          hover:bg-slate-50 dark:hover:bg-slate-800 
-         ${isActive ? "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300" : ""}`
+         ${isActive ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' : ''}`
       }
     >
-      <div className="flex items-center gap-2">{icon} {label}</div>
+      <div className='flex items-center gap-2'>{icon} {label}</div>
     </NavLink>
   );
 
   return (
-    <aside className="hidden md:block w-full md:w-[240px] border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
-      <div className="p-3 space-y-1">
-
-        {/* Acordeón Main Items */}
+    <aside className='hidden md:block w-full md:w-[240px] border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900'>
+      <div className='p-3 space-y-1'>
         <button
           onClick={() => setOpenMain(!openMain)}
-          className="w-full text-left flex items-center justify-between rounded-lg px-3 py-2 text-slate-700 dark:text-slate-300 
-                     hover:bg-slate-50 dark:hover:bg-slate-800 font-medium"
+          className='w-full text-left flex items-center justify-between rounded-lg px-3 py-2 text-slate-700 dark:text-slate-300 
+                     hover:bg-slate-50 dark:hover:bg-slate-800 font-medium'
         >
-          Menú Principal
-          <span>{openMain ? "▲" : "▼"}</span>
+          Áreas de Aprendizaje
+          <span>{openMain ? '▼' : '▶'}</span>
         </button>
-        {openMain && <div className="pl-4 space-y-1">{mainItems.map(renderNavItem)}</div>}
-
-        {/* Acordeón Exercises */}
-        <button
-          onClick={() => setOpenExercises(!openExercises)}
-          className="w-full text-left flex items-center justify-between rounded-lg px-3 py-2 text-slate-700 dark:text-slate-300 
-                     hover:bg-slate-50 dark:hover:bg-slate-800 font-medium"
-        >
-          Ejercicios - Jtest
-          <span>{openExercises ? "▲" : "▼"}</span>
-        </button>
-        {openExercises && <div className="pl-4 space-y-1">{exerciseItems.map(renderNavItem)}</div>}
-
+        {openMain && <div className='pl-4 space-y-1'>{mainItems.map(renderNavItem)}</div>}
       </div>
     </aside>
   );

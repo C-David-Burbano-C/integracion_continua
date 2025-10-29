@@ -1,7 +1,14 @@
 import { render, screen } from "@testing-library/react";
+import { ScoreProvider } from "./context/ScoreContext";
 import App from "./App";
 
 test("renderiza el título principal", () => {
-  render(<App />);
-  expect(screen.getByText(/Bienvenido a React/i)).toBeInTheDocument();
+  render(
+    <ScoreProvider>
+      <App />
+    </ScoreProvider>
+  );
+  // Buscar específicamente el elemento h1 con el título principal
+  const titleElement = screen.getByRole('heading', { level: 1 });
+  expect(titleElement).toHaveTextContent(/Colegio Mentes Creativas/i);
 });
