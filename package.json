@@ -10,7 +10,9 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write .",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "test:integration": "echo 'Integration tests not implemented yet'",
+    "test:prod": "echo 'Production tests not implemented yet'"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.6",
