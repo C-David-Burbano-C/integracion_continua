@@ -1,6 +1,5 @@
 // src/components/Navbar.tsx
 import React, { useEffect } from "react";
-import { GraduationIcon } from "./icons";
 
 interface NavbarProps {
   onMenuClick?: () => void;
@@ -41,11 +40,8 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <div className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-500 text-white">
-            <GraduationIcon size={16} />
-          </div>
-          <span className="hidden sm:inline">Exploradores del Conocimiento</span>
-          <span className="sm:hidden">Exploradores</span>
+          <div className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-500 text-white">U</div>
+          <span>UCC : Prácticas Desarrollo</span>
         </div>
 
         {/* Lado derecho: botón de tema */}

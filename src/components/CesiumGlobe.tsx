@@ -33,13 +33,43 @@ export default function CesiumGlobe({ kmlUrl = '/assets/earth/globo-terraqueo.km
       vrButton: false
     });
 
-    // Set OpenStreetMap as the imagery provider for better quality
-    viewer.imageryLayers.removeAll();
-    viewer.imageryLayers.addImageryProvider(
-      new Cesium.OpenStreetMapImageryProvider({
-        url: 'https://a.tile.openstreetmap.org/'
-      })
-    );
+    // Async function to set up imagery provider
+    const setupImagery = async () => {
+      try {
+        viewer.imageryLayers.removeAll();
+        const imageryProvider = await Cesium.createWorldImageryAsync();
+        viewer.imageryLayers.addImageryProvider(imageryProvider);
+      } catch (error) {
+        console.warn('Error loading world imagery, falling back to OpenStreetMap:', error);
+        viewer.imageryLayers.removeAll();
+        viewer.imageryLayers.addImageryProvider(
+          new Cesium.OpenStreetMapImageryProvider({
+            url: 'https://a.tile.openstreetmap.org/'
+          })
+        );
+      }
+
+      // Add enhanced visual effects for more realistic appearance
+      viewer.scene.globe.enableLighting = true;
+      viewer.scene.globe.dynamicAtmosphereLighting = true;
+      viewer.scene.globe.dynamicAtmosphereLightingFromSun = true;
+      
+      if (viewer.scene.sun) viewer.scene.sun.show = true;
+      if (viewer.scene.moon) viewer.scene.moon.show = true;
+      if (viewer.scene.skyBox) viewer.scene.skyBox.show = true;
+      if (viewer.scene.skyAtmosphere) viewer.scene.skyAtmosphere.show = true;
+      
+      viewer.scene.fog.enabled = false; // Disable fog for clearer view
+      viewer.scene.backgroundColor = Cesium.Color.BLACK; // Space background
+
+      // Improve rendering quality
+      viewer.scene.globe.maximumScreenSpaceError = 1.0; // Higher quality
+      if (viewer.scene.postProcessStages && viewer.scene.postProcessStages.fxaa) {
+        viewer.scene.postProcessStages.fxaa.enabled = true; // Anti-aliasing
+      }
+    };
+
+    setupImagery();
 
     // Prevent zooming inside the Earth
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1000000; // 1 million meters
@@ -49,16 +79,6 @@ export default function CesiumGlobe({ kmlUrl = '/assets/earth/globo-terraqueo.km
     viewer.camera.setView({
       destination: Cesium.Cartesian3.fromDegrees(0.0, 20.0, 15000000) // Africa central, global view
     });
-
-    // Enhance visual quality
-    viewer.scene.globe.enableLighting = true; // Simulate real sunlight
-    if (viewer.scene.skyBox) {
-      viewer.scene.skyBox.show = true; // Show stars
-    }
-    if (viewer.scene.skyAtmosphere) {
-      viewer.scene.skyAtmosphere.show = true; // Add blue atmosphere
-    }
-    viewer.scene.highDynamicRange = true; // More realistic colors
 
     viewerRef.current = viewer;
 
