@@ -59,7 +59,7 @@ export default function CesiumGlobe({ kmlUrl = '/assets/earth/globo-terraqueo.km
       if (viewer.scene.skyBox) viewer.scene.skyBox.show = true;
       if (viewer.scene.skyAtmosphere) viewer.scene.skyAtmosphere.show = true;
       
-      viewer.scene.fog.enabled = false; // Disable fog for clearer view
+      if (viewer.scene.fog) viewer.scene.fog.enabled = false; // Disable fog for clearer view
       viewer.scene.backgroundColor = Cesium.Color.BLACK; // Space background
 
       // Improve rendering quality
