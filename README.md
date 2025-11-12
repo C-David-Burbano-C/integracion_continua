@@ -447,6 +447,33 @@ Este proyecto es desarrollado para **Colegio Mentes Creativas** como parte del p
 
 ---
 
+## 🚀 Despliegue en Vercel
+
+### Configuración Automática
+Este proyecto está optimizado para despliegue automático en **Vercel**:
+
+1. **Conecta tu repositorio** en [vercel.com](https://vercel.com)
+2. **Configuración automática** detecta Vite + React
+3. **Build command**: `npm run build`
+4. **Output directory**: `dist`
+5. **Node.js version**: 18.18.0+
+
+### Assets de CesiumJS
+- Los assets de Cesium se copian automáticamente durante el build
+- Configuración optimizada para carga rápida
+- Cache headers configurados para assets estáticos
+
+### Variables de Entorno (Opcional)
+```bash
+# No se requieren variables de entorno para funcionalidad básica
+# Para Cesium Ion (opcional):
+# VITE_CESIUM_ION_TOKEN=your_token_here
+```
+
+### URL de Producción
+Después del despliegue, tu aplicación estará disponible en una URL como:
+`https://tu-proyecto.vercel.app`
+
 ## Validación Final
 
 **PROYECTO APROBADO** - Cumple 100% de criterios de aceptación

@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { ScoreProvider } from '../context/ScoreContext';
-import Matematicas from '../pages/Matematicas';
+import Matematicas from '../views/Matematicas';
 
 // Wrapper para proporcionar el contexto necesario
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (
