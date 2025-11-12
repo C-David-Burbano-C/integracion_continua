@@ -10,13 +10,13 @@ beforeEach(() => {
 
 // --- Pruebas de renderizado ---
 describe("Navbar - Renderizado", () => {
-  test("renderiza el título principal 'Colegio Mentes Creativas'", () => {
+  test("renderiza el título principal 'UCC : Prácticas Desarrollo'", () => {
     render(
       <ScoreProvider>
         <Navbar />
       </ScoreProvider>
     );
-    expect(screen.getByText(/Colegio Mentes Creativas/i)).toBeInTheDocument();
+    expect(screen.getByText(/UCC : Prácticas Desarrollo/i)).toBeInTheDocument();
   });
 
   test("renderiza el botón con el texto 'Tema'", () => {
@@ -28,13 +28,13 @@ describe("Navbar - Renderizado", () => {
     expect(screen.getByRole("button", { name: /Tema/i })).toBeInTheDocument();
   });
 
-  test("muestra el puntaje inicial en 0", () => {
+  test("renderiza el logo con la letra 'U'", () => {
     render(
       <ScoreProvider>
         <Navbar />
       </ScoreProvider>
     );
-    expect(screen.getByText(/Puntaje: 0/i)).toBeInTheDocument();
+    expect(screen.getByText("U")).toBeInTheDocument();
   });
 });
 
