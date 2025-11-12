@@ -8,15 +8,16 @@ export default {
   },
   setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
   transform: {
-    "^.+\\.(ts|tsx)$": ["ts-jest", { useESM: true }],
+    "^.+\\.(ts|tsx)$": ["ts-jest", {
+      useESM: true,
+      tsconfig: {
+        esModuleInterop: true,
+        allowSyntheticDefaultImports: true,
+      }
+    }],
   },
   extensionsToTreatAsEsm: [".ts", ".tsx"],
   testEnvironmentOptions: {
     customExportConditions: ["node", "node-addons"],
-  },
-  globals: {
-    "ts-jest": {
-      useESM: true,
-    },
   },
 };

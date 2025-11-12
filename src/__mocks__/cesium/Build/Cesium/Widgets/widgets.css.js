@@ -1,2 +1,2 @@
 // Mock para el CSS de Cesium
-export default {};
+module.exports = {};
