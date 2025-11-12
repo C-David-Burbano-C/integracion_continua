@@ -1,7 +1,29 @@
-import { useState } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Box, Sphere, Cylinder, Torus } from '@react-three/drei';
-import { LightningIcon } from '../components/icons';
+import EnergySourcesViewer from "../components/EnergySourcesViewer";import EnergySourcesViewer from "../components/EnergySourcesViewer";
+
+
+
+export default function EnergiaEnAccion() {export default function EnergiaEnAccion() {
+
+  return (  return (
+
+    <div className="space-y-8">    <div className="space-y-8">
+
+      <section className="bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">      <section className="bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+
+        <div className="container mx-auto px-4 py-6">        <div className="container mx-auto px-4 py-6">
+
+          <EnergySourcesViewer />          <EnergySourcesViewer />
+
+        </div>        </div>
+
+      </section>      </section>
+
+    </div>    </div>
+
+  );  );
+
+}}
+
 
 interface EnergySource {
   name: string;

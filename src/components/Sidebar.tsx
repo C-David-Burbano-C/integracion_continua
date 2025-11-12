@@ -1,119 +1,35 @@
-﻿import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { FaCalculator, FaLeaf, FaHome, FaGlobe, FaRobot, FaPalette } from 'react-icons/fa';
+﻿import { NavLink } from 'react-router-dom';
+import { FaHome, FaSun, FaGlobe, FaMap, FaRobot } from 'react-icons/fa';
 
 interface SidebarItem {
   label: string;
   route: string;
-  icon?: React.ReactNode;
-}
-
-interface SidebarGroup {
-  label: string;
   icon: React.ReactNode;
-  items: SidebarItem[];
 }
 
-const sidebarGroups: SidebarGroup[] = [
-  {
-    label: 'Matemáticas',
-    icon: <FaCalculator />,
-    items: [
-      { label: 'Geometría 3D', route: '/matematicas/geometria-3d' },
-      { label: 'Descomposición Figuras', route: '/matematicas/descomposicion' },
-      { label: 'Simetría', route: '/matematicas/simetría' },
-      { label: 'Fracciones 3D', route: '/matematicas/fracciones-3d' },
-    ]
-  },
-  {
-    label: 'Ciencias Naturales',
-    icon: <FaLeaf />,
-    items: [
-      { label: 'Anatomía 3D', route: '/ciencias-naturales/anatomia-3d' },
-      { label: 'Sistema Solar', route: '/ciencias-naturales/sistema-solar' },
-      { label: 'Ciclo del Agua', route: '/ciencias-naturales/ciclo-agua' },
-      { label: 'Clasificación Animales', route: '/ciencias-naturales/animales' },
-      { label: 'Energía en Acción', route: '/ciencias-naturales/energia' },
-    ]
-  },
-  {
-    label: 'Ciencias Sociales',
-    icon: <FaGlobe />,
-    items: [
-      { label: 'Mapa 3D Colombia', route: '/ciencias-sociales/mapa-colombia' },
-      { label: 'Globo Terráqueo', route: '/ciencias-sociales/globo-terraqueo' },
-    ]
-  },
-  {
-    label: 'Tecnología',
-    icon: <FaRobot />,
-    items: [
-      { label: 'Simulación Robots', route: '/tecnologia/robots' },
-    ]
-  },
-  {
-    label: 'Arte y Creatividad',
-    icon: <FaPalette />,
-    items: [
-      { label: 'Pintura 3D', route: '/arte/pintura-3d' },
-      { label: 'Escultura Digital', route: '/arte/escultura' },
-    ]
-  }
-];
-
-const mainItems: SidebarItem[] = [
+const sidebarItems: SidebarItem[] = [
   { label: 'Inicio', route: '/', icon: <FaHome /> },
+  { label: 'Sistema Solar', route: '/sistema-solar', icon: <FaSun /> },
+  { label: 'Mapa Colombia', route: '/mapa-colombia', icon: <FaMap /> },
+  { label: 'Globo Terráqueo', route: '/globo-terraqueo', icon: <FaGlobe /> },
+  { label: 'Simulación Robots', route: '/simulacion-robots', icon: <FaRobot /> },
 ];
 
 export default function Sidebar({ onClose }: { onClose?: () => void }) {
-  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
-    'Matemáticas': true,
-    'Ciencias Naturales': false,
-    'Ciencias Sociales': false,
-    'Tecnología': false,
-    'Arte y Creatividad': false,
-  });
-
-  const toggleGroup = (groupLabel: string) => {
-    setOpenGroups(prev => ({
-      ...prev,
-      [groupLabel]: !prev[groupLabel]
-    }));
-  };
-
   const renderNavItem = ({ label, route, icon }: SidebarItem) => (
     <NavLink
       key={route}
       to={route}
       onClick={() => onClose?.()}
       className={({ isActive }) =>
-        `w-full text-left flex items-center gap-2 justify-between rounded-lg px-3 py-2 text-slate-700 dark:text-slate-300 
-         hover:bg-slate-50 dark:hover:bg-slate-800 
-         ${isActive ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' : ''}`
+        `w-full text-left flex items-center gap-3 rounded-lg px-4 py-3 text-slate-700 dark:text-slate-300 
+         hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors
+         ${isActive ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 font-semibold' : ''}`
       }
     >
-      <div className='flex items-center gap-2'>{icon} {label}</div>
+      <span className="text-xl">{icon}</span>
+      <span>{label}</span>
     </NavLink>
-  );
-
-  const renderGroup = (group: SidebarGroup) => (
-    <div key={group.label} className='space-y-1'>
-      <button
-        onClick={() => toggleGroup(group.label)}
-        className='w-full text-left flex items-center justify-between rounded-lg px-3 py-2 text-slate-700 dark:text-slate-300 
-                   hover:bg-slate-50 dark:hover:bg-slate-800 font-medium'
-      >
-        <div className='flex items-center gap-2'>
-          {group.icon} {group.label}
-        </div>
-        <span>{openGroups[group.label] ? '▼' : '▶'}</span>
-      </button>
-      {openGroups[group.label] && (
-        <div className='pl-4 space-y-1'>
-          {group.items.map(renderNavItem)}
-        </div>
-      )}
-    </div>
   );
 
   return (
@@ -127,13 +43,10 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
           ✕ Cerrar
         </button>
         
-        {/* Elementos principales */}
-        {mainItems.map(renderNavItem)}
-        
-        {/* Grupos temáticos */}
-        <div className='pt-2 border-t border-slate-200 dark:border-slate-700 mt-2'>
-          {sidebarGroups.map(renderGroup)}
-        </div>
+        {/* Navegación */}
+        <nav className="space-y-1">
+          {sidebarItems.map(renderNavItem)}
+        </nav>
       </div>
     </aside>
   );

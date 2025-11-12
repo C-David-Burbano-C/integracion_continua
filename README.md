@@ -1,87 +1,172 @@
-# Colegio Mentes Creativas - Aplicación Educativa
+# Exploradores del Conocimiento# Colegio Mentes Creativas - Aplicación Educativa
 
-## Descripción del Proyecto
 
-**Colegio Mentes Creativas** es una aplicación educativa interactiva desarrollada con React y TypeScript, diseñada para estudiantes de educación básica. La plataforma ofrece contenido multimedia y evaluaciones interactivas en tres áreas fundamentales del aprendizaje:
 
-### Áreas de Aprendizaje
+Aplicación educativa interactiva con 4 componentes principales de visualización.## Descripción del Proyecto
 
-#### Matemáticas
-- **Geometría 3D**: Exploración interactiva de formas 3D con rotación, escala y colores
+
+
+## Componentes**Colegio Mentes Creativas** es una aplicación educativa interactiva desarrollada con React y TypeScript, diseñada para estudiantes de educación básica. La plataforma ofrece contenido multimedia y evaluaciones interactivas en tres áreas fundamentales del aprendizaje:
+
+
+
+### 1. Sistema Solar### Áreas de Aprendizaje
+
+- Visualización 3D del sistema solar completo
+
+- 8 planetas con órbitas animadas#### Matemáticas
+
+- Controles interactivos de cámara- **Geometría 3D**: Exploración interactiva de formas 3D con rotación, escala y colores
+
 - **Descomposición de Figuras**: Análisis de caras, aristas y vértices de sólidos geométricos
-- **Simetría**: Exploración de simetría en objetos (próximamente)
-- **Fracciones 3D**: Fracciones y proporciones visuales (próximamente)
 
-#### Ciencias Naturales
+### 2. Mapa de Colombia- **Simetría**: Exploración de simetría en objetos (próximamente)
+
+- Integración con Google Earth- **Fracciones 3D**: Fracciones y proporciones visuales (próximamente)
+
+- Vista satelital de Colombia
+
+- Información sobre las 6 regiones naturales#### Ciencias Naturales
+
 - **Sistema Solar**: Sistema solar interactivo (próximamente)
-- **Ciclo del Agua**: Simulación del ciclo del agua en 3D (próximamente)
-- **Clasificación de Animales**: Modelos 3D de animales (próximamente)
-- **Energía en Acción**: Simulación de energía con molino (próximamente)
+
+### 3. Globo Terráqueo- **Ciclo del Agua**: Simulación del ciclo del agua en 3D (próximamente)
+
+- Vista interactiva del planeta Tierra con Google Earth- **Clasificación de Animales**: Modelos 3D de animales (próximamente)
+
+- Navegación global- **Energía en Acción**: Simulación de energía con molino (próximamente)
+
+- Información sobre continentes y océanos
 
 #### Ciencias Sociales
-- **Mapa 3D de Colombia**: Mapa interactivo con drag & drop (próximamente)
-- **Globo Terráqueo**: Globo terráqueo interactivo (próximamente)
 
-#### Tecnología
-- **Construcción con Bloques**: Sistema tipo Minecraft (próximamente)
-- **Simulación de Robots**: Robots con movimientos básicos (próximamente)
+### 4. Simulación de Robots- **Mapa 3D de Colombia**: Mapa interactivo con drag & drop (próximamente)
 
-#### Arte y Creatividad
+- 4 tipos de robots en 3D:- **Globo Terráqueo**: Globo terráqueo interactivo (próximamente)
+
+  - Robot explorador con ruedas
+
+  - Brazo robótico industrial#### Tecnología
+
+  - Robot humanoide- **Construcción con Bloques**: Sistema tipo Minecraft (próximamente)
+
+  - Dron volador- **Simulación de Robots**: Robots con movimientos básicos (próximamente)
+
+- Animaciones realistas
+
+- Controles interactivos#### Arte y Creatividad
+
 - **Pintura 3D**: Dibujar en el aire con colores (próximamente)
-- **Escultura Digital**: Moldear figuras en arcilla digital (próximamente)
 
-### Características Principales
-- **Sistema de Puntuación Global**: Seguimiento del progreso del estudiante
-- **Quizzes Interactivos**: Evaluaciones de 3 preguntas por materia
-- **Contenido 3D Interactivo**: Figuras geométricas con Three.js
-- **Navegación Jerárquica**: Sidebar organizado por áreas temáticas
-- **Diseño Responsive**: Optimizado para dispositivos móviles y desktop
-- **Tema Oscuro/Claro**: Adaptable a preferencias del usuario
+## Tecnologías- **Escultura Digital**: Moldear figuras en arcilla digital (próximamente)
+
+
+
+- React 18.3.1### Características Principales
+
+- TypeScript 5.6.2- **Sistema de Puntuación Global**: Seguimiento del progreso del estudiante
+
+- Vite 6.0.7- **Quizzes Interactivos**: Evaluaciones de 3 preguntas por materia
+
+- Three.js + React Three Fiber (visualizaciones 3D)- **Contenido 3D Interactivo**: Figuras geométricas con Three.js
+
+- Google Earth (mapas)- **Navegación Jerárquica**: Sidebar organizado por áreas temáticas
+
+- Tailwind CSS (estilos)- **Diseño Responsive**: Optimizado para dispositivos móviles y desktop
+
+- Framer Motion (animaciones)- **Tema Oscuro/Claro**: Adaptable a preferencias del usuario
+
 - **Accesibilidad**: Iconos SVG y cumplimiento de estándares WCAG
-- **Performance Optimizado**: Carga rápida y experiencia fluida
 
----
+## Instalación- **Performance Optimizado**: Carga rápida y experiencia fluida
 
-## Estándares de Calidad - ISO/IEC 25010
 
-### Métricas Implementadas
-- **Usabilidad (Operabilidad)**: Navegación intuitiva y feedback visual claro
-- **Confiabilidad (Madurez)**: Cobertura de tests >80% con CI/CD robusto
-- **Mantenibilidad**: Código modular con TypeScript y buenas prácticas
-- **Portabilidad**: Funciona en múltiples navegadores y dispositivos
 
-**Scores de Calidad Actuales:**
-- Lighthouse Performance: >80
-- Cobertura de Tests: 85%+
-- Tiempo de Carga: <2s
-- Accesibilidad: >90
+```bash---
 
----
-
-## Inicio Rápido
-
-### Prerrequisitos
-- **Node.js**: v18.x o superior
-- **npm**: v8.x o superior
-- **Git**: Para control de versiones
-
-### Instalación
-
-```bash
-# Clonar el repositorio
-git clone <repository-url>
-cd integracion_continua
-
-# Instalar dependencias
 npm install
+
+```## Estándares de Calidad - ISO/IEC 25010
+
+
+
+## Desarrollo### Métricas Implementadas
+
+- **Usabilidad (Operabilidad)**: Navegación intuitiva y feedback visual claro
+
+```bash- **Confiabilidad (Madurez)**: Cobertura de tests >80% con CI/CD robusto
+
+npm run dev- **Mantenibilidad**: Código modular con TypeScript y buenas prácticas
+
+```- **Portabilidad**: Funciona en múltiples navegadores y dispositivos
+
+
+
+## Construcción**Scores de Calidad Actuales:**
+
+- Lighthouse Performance: >80
+
+```bash- Cobertura de Tests: 85%+
+
+npm run build- Tiempo de Carga: <2s
+
+```- Accesibilidad: >90
+
+
+
+## Estructura---
+
+
+
+```## Inicio Rápido
+
+src/
+
+├── components/          # Componentes con lógica### Prerrequisitos
+
+│   ├── RobotSimulator.tsx- **Node.js**: v18.x o superior
+
+│   ├── SolarSystemViewer.tsx- **npm**: v8.x o superior
+
+│   ├── Layout.tsx- **Git**: Para control de versiones
+
+│   ├── Navbar.tsx
+
+│   └── Sidebar.tsx### Instalación
+
+├── views/              # Vistas (wrappers simples)
+
+│   ├── HomePage.tsx```bash
+
+│   ├── SistemaSolar.tsx# Clonar el repositorio
+
+│   ├── MapaColombia.tsxgit clone <repository-url>
+
+│   ├── GloboTerraqueo.tsxcd integracion_continua
+
+│   └── SimulacionRobots.tsx
+
+└── routes/# Instalar dependencias
+
+    └── AppRoutes.tsxnpm install
+
+``````
+
+
+
+## Arquitectura### Ejecutar en Desarrollo
+
+
+
+Este proyecto sigue el patrón de separación entre:```bash
+
+- **Components**: Contienen toda la lógica y presentación compleja# Iniciar servidor de desarrollo
+
+- **Views**: Wrappers simples que importan y renderizan componentesnpm run dev
+
 ```
 
-### Ejecutar en Desarrollo
-
-```bash
-# Iniciar servidor de desarrollo
-npm run dev
-```
+Referencias: [guswill24/Pruebas_unitarias_jest](https://github.com/guswill24/Pruebas_unitarias_jest)
 
 La aplicación estará disponible en: `http://localhost:5173`
 

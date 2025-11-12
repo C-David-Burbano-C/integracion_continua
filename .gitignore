@@ -13,6 +13,9 @@ dist
 dist-ssr
 *.local
 
+# Documentation
+CESIUM_README.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

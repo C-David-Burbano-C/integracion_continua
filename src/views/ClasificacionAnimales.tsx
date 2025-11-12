@@ -1,14 +1,27 @@
-import { useState } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Box, Sphere, Cone, Cylinder } from '@react-three/drei';
-import { PawIcon } from '../components/icons';
+import AnimalClassifier from "../components/AnimalClassifier";import { useState } from 'react';
 
-interface Animal {
-  name: string;
-  category: string;
-  color: string;
-  shape: 'box' | 'sphere' | 'cone' | 'cylinder';
-  characteristics: string[];
+import { Canvas } from '@react-three/fiber';
+
+export default function ClasificacionAnimales() {import { OrbitControls, Box, Sphere, Cone, Cylinder } from '@react-three/drei';
+
+  return (import { PawIcon } from '../components/icons';
+
+    <div className="space-y-8">
+
+      <section className="bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">interface Animal {
+
+        <div className="container mx-auto px-4 py-6">  name: string;
+
+          <AnimalClassifier />  category: string;
+
+        </div>  color: string;
+
+      </section>  shape: 'box' | 'sphere' | 'cone' | 'cylinder';
+
+    </div>  characteristics: string[];
+
+  );}
+
 }
 
 const animals: Animal[] = [
