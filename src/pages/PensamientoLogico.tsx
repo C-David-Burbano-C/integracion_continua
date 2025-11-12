@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import { useScore } from '../context/ScoreContext';
+import {
+  BrainIcon,
+  SearchIcon,
+  PuzzleIcon,
+  PartyIcon,
+  ConfettiIcon
+} from '../components/icons';
 
 interface Question {
   id: number;
@@ -34,11 +41,16 @@ const logicQuestions: Question[] = [
 ];
 
 const PensamientoLogico: React.FC = () => {
-  const { addScore } = useScore();
+  const { markModuleAsRead } = useScore();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
+
+  // Marcar el módulo como leído al montar el componente
+  React.useEffect(() => {
+    markModuleAsRead('pensamiento-logico-quiz');
+  }, [markModuleAsRead]);
 
   const handleAnswerSelect = (answerIndex: number) => {
     setSelectedAnswer(answerIndex);
@@ -46,12 +58,6 @@ const PensamientoLogico: React.FC = () => {
 
   const handleSubmitAnswer = () => {
     if (selectedAnswer === null) return;
-
-    const isCorrect = selectedAnswer === logicQuestions[currentQuestion].correctAnswer;
-    if (isCorrect) {
-      addScore(10); // 10 puntos por respuesta correcta
-    }
-
     setShowResult(true);
   };
 
@@ -79,7 +85,8 @@ const PensamientoLogico: React.FC = () => {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-slate-800 dark:text-slate-100 mb-4">
-              🧠 Pensamiento Lógico
+              <BrainIcon className="inline mr-2 text-purple-500" size={36} />
+              Pensamiento Lógico
             </h1>
             <p className="text-lg text-slate-600 dark:text-slate-300">
               Desarrolla tu capacidad de razonamiento y resolución de problemas
@@ -95,13 +102,13 @@ const PensamientoLogico: React.FC = () => {
               <div className="space-y-4">
                 <div className="aspect-video bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
                   <div className="text-center">
-                    <div className="text-6xl mb-2">🔍</div>
+                    <SearchIcon className="text-purple-500 mb-2" size={60} />
                     <p className="text-slate-600 dark:text-slate-300">Video: Razonamiento Lógico</p>
                   </div>
                 </div>
                 <div className="aspect-video bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
                   <div className="text-center">
-                    <div className="text-6xl mb-2">🧩</div>
+                    <PuzzleIcon className="text-purple-500 mb-2" size={60} />
                     <p className="text-slate-600 dark:text-slate-300">Juegos: Rompecabezas</p>
                   </div>
                 </div>
@@ -194,7 +201,10 @@ const PensamientoLogico: React.FC = () => {
                         : 'text-red-800 dark:text-red-200'
                     }`}>
                       {selectedAnswer === logicQuestions[currentQuestion].correctAnswer
-                        ? '¡Correcto! 🎉'
+                        ? <>
+                            <PartyIcon className="inline mr-2 text-purple-500" size={20} />
+                            ¡Correcto!
+                          </>
                         : 'Incorrecto'}
                     </p>
                     <p className="text-slate-600 dark:text-slate-300 mt-1">
@@ -224,7 +234,7 @@ const PensamientoLogico: React.FC = () => {
               </div>
             ) : (
               <div className="text-center py-8">
-                <div className="text-6xl mb-4">🎊</div>
+                <ConfettiIcon className="text-yellow-500 mb-4" size={60} />
                 <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-4">
                   ¡Quiz Completado!
                 </h3>

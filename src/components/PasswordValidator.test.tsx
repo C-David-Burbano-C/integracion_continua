@@ -6,9 +6,11 @@ describe("PasswordValidator Component", () => {
   test("muestra los requisitos iniciales como no cumplidos", () => {
     render(<PasswordValidator />);
 
-    expect(screen.getByText(/Al menos 8 caracteres/)).toHaveTextContent("❌");
-    expect(screen.getByText(/Contiene un número/)).toHaveTextContent("❌");
-    expect(screen.getByText(/Contiene una letra mayúscula/)).toHaveTextContent("❌");
+    const failedRules = screen.getAllByRole('listitem');
+    expect(failedRules).toHaveLength(3);
+    failedRules.forEach(rule => {
+      expect(rule).toHaveClass('text-red-600');
+    });
   });
 
   test("valida correctamente cuando se escribe una contraseña válida", () => {
@@ -17,9 +19,10 @@ describe("PasswordValidator Component", () => {
 
     fireEvent.change(input, { target: { value: "Password123" } });
 
-    expect(screen.getByText(/Al menos 8 caracteres/)).toHaveTextContent("✔️");
-    expect(screen.getByText(/Contiene un número/)).toHaveTextContent("✔️");
-    expect(screen.getByText(/Contiene una letra mayúscula/)).toHaveTextContent("✔️");
+    const successRules = screen.getAllByRole('listitem');
+    successRules.forEach(rule => {
+      expect(rule).toHaveClass('text-green-600');
+    });
   });
 
   test("detecta cuando solo algunas reglas se cumplen", () => {
@@ -28,8 +31,9 @@ describe("PasswordValidator Component", () => {
 
     fireEvent.change(input, { target: { value: "password123" } });
 
-    expect(screen.getByText(/Al menos 8 caracteres/)).toHaveTextContent("✔️");
-    expect(screen.getByText(/Contiene un número/)).toHaveTextContent("✔️");
-    expect(screen.getByText(/Contiene una letra mayúscula/)).toHaveTextContent("❌");
+    const allRules = screen.getAllByRole('listitem');
+    expect(allRules[0]).toHaveClass('text-green-600'); // Al menos 8 caracteres
+    expect(allRules[1]).toHaveClass('text-green-600'); // Contiene un número
+    expect(allRules[2]).toHaveClass('text-red-600'); // Contiene una letra mayúscula
   });
 });

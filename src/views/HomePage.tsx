@@ -1,6 +1,16 @@
 import { motion } from "framer-motion";
 import { useScore } from "../context/ScoreContext";
 import { Link } from "react-router-dom";
+import {
+  GraduationIcon,
+  TrophyIcon,
+  AbacusIcon,
+  LeafIcon,
+  BrainIcon,
+  TargetIcon,
+  BookIcon,
+  StarIcon
+} from "../components/icons";
 
 export default function HomeContent() {
   const { totalScore } = useScore();
@@ -16,7 +26,7 @@ export default function HomeContent() {
           >
             {/* Logo del Colegio */}
             <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-emerald-400 to-blue-500 mb-6 shadow-lg">
-              <span className="text-3xl font-bold text-white">🎓</span>
+              <GraduationIcon className="text-white" size={36} />
             </div>
 
             <h1 className="text-5xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
@@ -28,7 +38,7 @@ export default function HomeContent() {
 
             {/* Puntaje Total */}
             <div className="inline-flex items-center gap-3 bg-white dark:bg-slate-800 px-6 py-3 rounded-full shadow-md mb-8">
-              <span className="text-2xl">🏆</span>
+              <TrophyIcon className="text-yellow-500" size={24} />
               <span className="text-lg font-semibold text-slate-700 dark:text-slate-300">
                 Puntaje Total: {totalScore} puntos
               </span>
@@ -45,7 +55,7 @@ export default function HomeContent() {
           >
             <Link to="/matematicas">
               <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
-                <div className="text-6xl mb-4">🧮</div>
+                <AbacusIcon className="text-blue-500 mb-4" size={60} />
                 <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-3">
                   Matemáticas
                 </h3>
@@ -66,7 +76,7 @@ export default function HomeContent() {
           >
             <Link to="/ciencias-naturales">
               <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
-                <div className="text-6xl mb-4">🌿</div>
+                <LeafIcon className="text-green-500 mb-4" size={60} />
                 <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-3">
                   Ciencias Naturales
                 </h3>
@@ -87,7 +97,7 @@ export default function HomeContent() {
           >
             <Link to="/pensamiento-logico">
               <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
-                <div className="text-6xl mb-4">🧠</div>
+                <BrainIcon className="text-purple-500 mb-4" size={60} />
                 <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-3">
                   Pensamiento Lógico
                 </h3>
@@ -119,21 +129,21 @@ export default function HomeContent() {
           </p>
           <div className="grid md:grid-cols-3 gap-6 text-left">
             <div className="text-center">
-              <div className="text-4xl mb-2">🎯</div>
+              <TargetIcon className="text-red-500 mb-2" size={40} />
               <h4 className="font-semibold text-slate-800 dark:text-slate-100 mb-2">Objetivos</h4>
               <p className="text-sm text-slate-600 dark:text-slate-300">
                 Desarrollar habilidades cognitivas y fomentar el amor por el aprendizaje
               </p>
             </div>
             <div className="text-center">
-              <div className="text-4xl mb-2">📚</div>
+              <BookIcon className="text-blue-500 mb-2" size={40} />
               <h4 className="font-semibold text-slate-800 dark:text-slate-100 mb-2">Metodología</h4>
               <p className="text-sm text-slate-600 dark:text-slate-300">
                 Aprendizaje lúdico con recursos multimedia interactivos
               </p>
             </div>
             <div className="text-center">
-              <div className="text-4xl mb-2">🌟</div>
+              <StarIcon className="text-yellow-500 mb-2" size={40} />
               <h4 className="font-semibold text-slate-800 dark:text-slate-100 mb-2">Resultados</h4>
               <p className="text-sm text-slate-600 dark:text-slate-300">
                 Estudiantes motivados y preparados para los desafíos del futuro

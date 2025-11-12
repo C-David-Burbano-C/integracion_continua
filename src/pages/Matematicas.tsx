@@ -1,5 +1,17 @@
 import React, { useState } from 'react';
 import { useScore } from '../context/ScoreContext';
+import Interactive3DShapes from '../components/Interactive3DShapes';
+import GeometricDecomposition from '../components/GeometricDecomposition';
+import {
+  AbacusIcon,
+  MemoIcon,
+  TriangleIcon,
+  PuzzleIcon,
+  RulerIcon,
+  NumbersIcon,
+  PartyIcon,
+  ConfettiIcon
+} from '../components/icons';
 
 interface Question {
   id: number;
@@ -34,11 +46,18 @@ const mathQuestions: Question[] = [
 ];
 
 const Matematicas: React.FC = () => {
-  const { addScore } = useScore();
+  const { markModuleAsRead } = useScore();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [activeModule, setActiveModule] = useState<'quiz' | '3dshapes' | 'decomposition'>('quiz');
+  const [selectedShape, setSelectedShape] = useState<string>('');
+
+  const handleModuleChange = (module: 'quiz' | '3dshapes' | 'decomposition') => {
+    setActiveModule(module);
+    markModuleAsRead(`matematicas-${module}`);
+  };
 
   const handleAnswerSelect = (answerIndex: number) => {
     setSelectedAnswer(answerIndex);
@@ -46,12 +65,6 @@ const Matematicas: React.FC = () => {
 
   const handleSubmitAnswer = () => {
     if (selectedAnswer === null) return;
-
-    const isCorrect = selectedAnswer === mathQuestions[currentQuestion].correctAnswer;
-    if (isCorrect) {
-      addScore(10); // 10 puntos por respuesta correcta
-    }
-
     setShowResult(true);
   };
 
@@ -79,12 +92,89 @@ const Matematicas: React.FC = () => {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-slate-800 dark:text-slate-100 mb-4">
-              🧮 Matemáticas Interactivas
+              <AbacusIcon className="inline mr-2 text-blue-500" size={36} />
+              Matemáticas Interactivas
             </h1>
             <p className="text-lg text-slate-600 dark:text-slate-300">
               Aprende matemáticas de manera divertida con ejercicios y juegos
             </p>
           </div>
+
+          {/* Module Navigation */}
+          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 mb-8">
+            <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-4">
+              Módulos Interactivos
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              <button
+                onClick={() => handleModuleChange('quiz')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  activeModule === 'quiz'
+                    ? 'bg-emerald-500 text-white'
+                    : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'
+                }`}
+              >
+                <MemoIcon className="inline mr-2" size={16} />
+                Quiz Interactivo
+              </button>
+              <button
+                onClick={() => handleModuleChange('3dshapes')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  activeModule === '3dshapes'
+                    ? 'bg-emerald-500 text-white'
+                    : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'
+                }`}
+              >
+                <TriangleIcon className="inline mr-2" size={16} />
+                Formas 3D Interactivas
+              </button>
+              <button
+                onClick={() => handleModuleChange('decomposition')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  activeModule === 'decomposition'
+                    ? 'bg-emerald-500 text-white'
+                    : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'
+                }`}
+              >
+                <PuzzleIcon className="inline mr-2" size={16} />
+                Descomposición Geométrica
+              </button>
+            </div>
+          </div>
+
+          {/* Interactive Modules */}
+          {activeModule === '3dshapes' && (
+            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 mb-8">
+              <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-4">
+                <TriangleIcon className="inline mr-2 text-blue-500" size={24} />
+                Formas 3D Interactivas
+              </h2>
+              <p className="text-slate-600 dark:text-slate-300 mb-4">
+                Explora diferentes formas geométricas 3D. Haz clic en cualquier forma para ver sus propiedades.
+              </p>
+              <Interactive3DShapes onShapeSelect={(shape) => setSelectedShape(shape)} />
+              {selectedShape && (
+                <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                  <p className="text-blue-800 dark:text-blue-200">
+                    Forma seleccionada: <strong>{selectedShape}</strong>
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeModule === 'decomposition' && (
+            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 mb-8">
+              <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-4">
+                <PuzzleIcon className="inline mr-2 text-purple-500" size={24} />
+                Descomposición Geométrica
+              </h2>
+              <p className="text-slate-600 dark:text-slate-300 mb-4">
+                Aprende cómo descomponer figuras complejas en componentes más simples.
+              </p>
+              <GeometricDecomposition figure="cube" />
+            </div>
+          )}
 
           {/* Multimedia Content */}
           <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 mb-8">
@@ -95,13 +185,13 @@ const Matematicas: React.FC = () => {
               <div className="space-y-4">
                 <div className="aspect-video bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
                   <div className="text-center">
-                    <div className="text-6xl mb-2">📐</div>
+                    <RulerIcon className="text-blue-500 mb-2" size={60} />
                     <p className="text-slate-600 dark:text-slate-300">Video: Geometría Básica</p>
                   </div>
                 </div>
                 <div className="aspect-video bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
                   <div className="text-center">
-                    <div className="text-6xl mb-2">🔢</div>
+                    <NumbersIcon className="text-green-500 mb-2" size={60} />
                     <p className="text-slate-600 dark:text-slate-300">Animación: Números</p>
                   </div>
                 </div>
@@ -131,7 +221,8 @@ const Matematicas: React.FC = () => {
           </div>
 
           {/* Quiz Section */}
-          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6">
+          {activeModule === 'quiz' && (
+            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6">
             <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-6">
               Quiz Interactivo
             </h2>
@@ -194,7 +285,10 @@ const Matematicas: React.FC = () => {
                         : 'text-red-800 dark:text-red-200'
                     }`}>
                       {selectedAnswer === mathQuestions[currentQuestion].correctAnswer
-                        ? '¡Correcto! 🎉'
+                        ? <>
+                            <PartyIcon className="inline mr-2 text-emerald-500" size={20} />
+                            ¡Correcto!
+                          </>
                         : 'Incorrecto'}
                     </p>
                     <p className="text-slate-600 dark:text-slate-300 mt-1">
@@ -224,7 +318,7 @@ const Matematicas: React.FC = () => {
               </div>
             ) : (
               <div className="text-center py-8">
-                <div className="text-6xl mb-4">🎊</div>
+                <ConfettiIcon className="text-yellow-500 mb-4" size={60} />
                 <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-4">
                   ¡Quiz Completado!
                 </h3>
@@ -240,6 +334,7 @@ const Matematicas: React.FC = () => {
               </div>
             )}
           </div>
+          )}
         </div>
       </div>
     </div>

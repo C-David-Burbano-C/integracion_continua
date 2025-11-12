@@ -5,16 +5,39 @@
 **Colegio Mentes Creativas** es una aplicación educativa interactiva desarrollada con React y TypeScript, diseñada para estudiantes de educación básica. La plataforma ofrece contenido multimedia y evaluaciones interactivas en tres áreas fundamentales del aprendizaje:
 
 ### Áreas de Aprendizaje
-- **Matemáticas**: Conceptos fundamentales con ejercicios prácticos
-- **Ciencias Naturales**: Exploración del mundo natural
-- **Pensamiento Lógico**: Desarrollo del razonamiento crítico
+
+#### Matemáticas
+- **Geometría 3D**: Exploración interactiva de formas 3D con rotación, escala y colores
+- **Descomposición de Figuras**: Análisis de caras, aristas y vértices de sólidos geométricos
+- **Simetría**: Exploración de simetría en objetos (próximamente)
+- **Fracciones 3D**: Fracciones y proporciones visuales (próximamente)
+
+#### Ciencias Naturales
+- **Sistema Solar**: Sistema solar interactivo (próximamente)
+- **Ciclo del Agua**: Simulación del ciclo del agua en 3D (próximamente)
+- **Clasificación de Animales**: Modelos 3D de animales (próximamente)
+- **Energía en Acción**: Simulación de energía con molino (próximamente)
+
+#### Ciencias Sociales
+- **Mapa 3D de Colombia**: Mapa interactivo con drag & drop (próximamente)
+- **Globo Terráqueo**: Globo terráqueo interactivo (próximamente)
+
+#### Tecnología
+- **Construcción con Bloques**: Sistema tipo Minecraft (próximamente)
+- **Simulación de Robots**: Robots con movimientos básicos (próximamente)
+
+#### Arte y Creatividad
+- **Pintura 3D**: Dibujar en el aire con colores (próximamente)
+- **Escultura Digital**: Moldear figuras en arcilla digital (próximamente)
 
 ### Características Principales
 - **Sistema de Puntuación Global**: Seguimiento del progreso del estudiante
 - **Quizzes Interactivos**: Evaluaciones de 3 preguntas por materia
+- **Contenido 3D Interactivo**: Figuras geométricas con Three.js
+- **Navegación Jerárquica**: Sidebar organizado por áreas temáticas
 - **Diseño Responsive**: Optimizado para dispositivos móviles y desktop
 - **Tema Oscuro/Claro**: Adaptable a preferencias del usuario
-- **Accesibilidad**: Cumple estándares WCAG para inclusión
+- **Accesibilidad**: Iconos SVG y cumplimiento de estándares WCAG
 - **Performance Optimizado**: Carga rápida y experiencia fluida
 
 ---
@@ -87,7 +110,7 @@ npm run preview
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 src/
@@ -149,14 +172,27 @@ npm run format
 ## Contenido Educativo
 
 ### Matemáticas
+#### Geometría 3D (Implementado)
+- Exploración de formas 3D interactivas
+- Cubo, esfera, cilindro y cono
+- Controles de rotación y color
+- Visualización de propiedades geométricas
+
+#### Descomposición de Figuras (Implementado)
+- Análisis de 5 sólidos geométricos
+- Cálculo de caras, aristas y vértices
+- Fórmula de Euler interactiva
+- Visualización 3D/2D
+
+#### Próximamente
 - Suma y resta avanzada
-- Geometría básica
+- Geometría básica tradicional
 - Problemas aplicados
 
 ### Ciencias Naturales
-- Ecosistemas y biodiversidad
-- Procesos físicos y químicos
-- Observación científica
+- Ecosistemas y biodiversidad (próximamente)
+- Procesos físicos y químicos (próximamente)
+- Observación científica (próximamente)
 
 ### Pensamiento Lógico
 - Patrones y secuencias
@@ -178,7 +214,9 @@ Cada sección incluye:
 - **TypeScript** - Tipado estático
 - **Vite** - Build tool ultrarrápido
 - **TailwindCSS** - Framework de estilos
-- **Framer Motion** - Animaciones fluidas
+- **Three.js** - Gráficos 3D interactivos
+- **@react-three/fiber** - React renderer para Three.js
+- **@react-three/drei** - Helpers para react-three-fiber
 
 ### Testing
 - **Jest** - Framework de testing
@@ -234,9 +272,11 @@ Cada sección incluye:
 
 ---
 
-## 🤝 Contribución
+## Contribución
 
-### 📝 Guías de Desarrollo
+---
+
+## Guías de Desarrollo
 1. **Code Style**: Seguir ESLint y Prettier
 2. **Testing**: Cobertura mínima 80%
 3. **Commits**: Mensajes descriptivos en español
@@ -307,13 +347,13 @@ npm run lighthouse
 
 ---
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto es desarrollado para **Colegio Mentes Creativas** como parte del programa educativo de Ingeniería Web.
 
 ---
 
-## 👥 Equipo de Desarrollo
+## Equipo de Desarrollo
 
 **Desarrollado por:** Estudiantes de Ingeniería Web - UCC
 **Institución:** Colegio Mentes Creativas

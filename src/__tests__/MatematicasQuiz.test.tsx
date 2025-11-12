@@ -20,7 +20,7 @@ describe('Matematicas - Quiz Functionality', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('🧮 Matemáticas Interactivas')).toBeInTheDocument();
+    expect(screen.getByText('Matemáticas Interactivas')).toBeInTheDocument();
   });
 
   test('muestra la primera pregunta del quiz', () => {

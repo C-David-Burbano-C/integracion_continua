@@ -1,6 +1,6 @@
 ﻿import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaCalculator, FaLeaf, FaBrain, FaHome } from 'react-icons/fa';
+import { FaCalculator, FaLeaf, FaHome, FaGlobe, FaRobot, FaPalette } from 'react-icons/fa';
 
 interface SidebarItem {
   label: string;
@@ -8,20 +8,84 @@ interface SidebarItem {
   icon?: React.ReactNode;
 }
 
-const mainItems: SidebarItem[] = [
-  { label: 'Inicio', route: '/', icon: <FaHome /> },
-  { label: 'Matemáticas', route: '/matematicas', icon: <FaCalculator /> },
-  { label: 'Ciencias Naturales', route: '/ciencias-naturales', icon: <FaLeaf /> },
-  { label: 'Pensamiento Lógico', route: '/pensamiento-logico', icon: <FaBrain /> },
+interface SidebarGroup {
+  label: string;
+  icon: React.ReactNode;
+  items: SidebarItem[];
+}
+
+const sidebarGroups: SidebarGroup[] = [
+  {
+    label: 'Matemáticas',
+    icon: <FaCalculator />,
+    items: [
+      { label: 'Geometría 3D', route: '/matematicas/geometria-3d' },
+      { label: 'Descomposición Figuras', route: '/matematicas/descomposicion' },
+      { label: 'Simetría', route: '/matematicas/simetría' },
+      { label: 'Fracciones 3D', route: '/matematicas/fracciones-3d' },
+    ]
+  },
+  {
+    label: 'Ciencias Naturales',
+    icon: <FaLeaf />,
+    items: [
+      { label: 'Anatomía 3D', route: '/ciencias-naturales/anatomia-3d' },
+      { label: 'Sistema Solar', route: '/ciencias-naturales/sistema-solar' },
+      { label: 'Ciclo del Agua', route: '/ciencias-naturales/ciclo-agua' },
+      { label: 'Clasificación Animales', route: '/ciencias-naturales/animales' },
+      { label: 'Energía en Acción', route: '/ciencias-naturales/energia' },
+    ]
+  },
+  {
+    label: 'Ciencias Sociales',
+    icon: <FaGlobe />,
+    items: [
+      { label: 'Mapa 3D Colombia', route: '/ciencias-sociales/mapa-colombia' },
+      { label: 'Globo Terráqueo', route: '/ciencias-sociales/globo-terraqueo' },
+    ]
+  },
+  {
+    label: 'Tecnología',
+    icon: <FaRobot />,
+    items: [
+      { label: 'Simulación Robots', route: '/tecnologia/robots' },
+    ]
+  },
+  {
+    label: 'Arte y Creatividad',
+    icon: <FaPalette />,
+    items: [
+      { label: 'Pintura 3D', route: '/arte/pintura-3d' },
+      { label: 'Escultura Digital', route: '/arte/escultura' },
+    ]
+  }
 ];
 
-export default function Sidebar() {
-  const [openMain, setOpenMain] = useState(true);
+const mainItems: SidebarItem[] = [
+  { label: 'Inicio', route: '/', icon: <FaHome /> },
+];
+
+export default function Sidebar({ onClose }: { onClose?: () => void }) {
+  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
+    'Matemáticas': true,
+    'Ciencias Naturales': false,
+    'Ciencias Sociales': false,
+    'Tecnología': false,
+    'Arte y Creatividad': false,
+  });
+
+  const toggleGroup = (groupLabel: string) => {
+    setOpenGroups(prev => ({
+      ...prev,
+      [groupLabel]: !prev[groupLabel]
+    }));
+  };
 
   const renderNavItem = ({ label, route, icon }: SidebarItem) => (
     <NavLink
       key={route}
       to={route}
+      onClick={() => onClose?.()}
       className={({ isActive }) =>
         `w-full text-left flex items-center gap-2 justify-between rounded-lg px-3 py-2 text-slate-700 dark:text-slate-300 
          hover:bg-slate-50 dark:hover:bg-slate-800 
@@ -32,18 +96,44 @@ export default function Sidebar() {
     </NavLink>
   );
 
+  const renderGroup = (group: SidebarGroup) => (
+    <div key={group.label} className='space-y-1'>
+      <button
+        onClick={() => toggleGroup(group.label)}
+        className='w-full text-left flex items-center justify-between rounded-lg px-3 py-2 text-slate-700 dark:text-slate-300 
+                   hover:bg-slate-50 dark:hover:bg-slate-800 font-medium'
+      >
+        <div className='flex items-center gap-2'>
+          {group.icon} {group.label}
+        </div>
+        <span>{openGroups[group.label] ? '▼' : '▶'}</span>
+      </button>
+      {openGroups[group.label] && (
+        <div className='pl-4 space-y-1'>
+          {group.items.map(renderNavItem)}
+        </div>
+      )}
+    </div>
+  );
+
   return (
-    <aside className='hidden md:block w-full md:w-[240px] border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900'>
+    <aside role="complementary" className='h-full w-full border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-y-auto'>
       <div className='p-3 space-y-1'>
+        {/* Botón cerrar en mobile */}
         <button
-          onClick={() => setOpenMain(!openMain)}
-          className='w-full text-left flex items-center justify-between rounded-lg px-3 py-2 text-slate-700 dark:text-slate-300 
-                     hover:bg-slate-50 dark:hover:bg-slate-800 font-medium'
+          onClick={onClose}
+          className="md:hidden w-full text-right px-3 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
         >
-          Áreas de Aprendizaje
-          <span>{openMain ? '▼' : '▶'}</span>
+          ✕ Cerrar
         </button>
-        {openMain && <div className='pl-4 space-y-1'>{mainItems.map(renderNavItem)}</div>}
+        
+        {/* Elementos principales */}
+        {mainItems.map(renderNavItem)}
+        
+        {/* Grupos temáticos */}
+        <div className='pt-2 border-t border-slate-200 dark:border-slate-700 mt-2'>
+          {sidebarGroups.map(renderGroup)}
+        </div>
       </div>
     </aside>
   );
