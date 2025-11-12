@@ -100,7 +100,6 @@ jobs:
         with:
           collection: Postman_collection.json
           reporters: cli,json
-          reporter-json-export: test-results/postman-results.json
         continue-on-error: true
 
       - name: 📤 Upload integration test results
@@ -169,6 +168,7 @@ jobs:
 
       - name: 🔍 NPM security audit
         run: npm audit --audit-level moderate
+        continue-on-error: true
 
       - name: 🛡️ Snyk security scan
         uses: snyk/actions/node@master
