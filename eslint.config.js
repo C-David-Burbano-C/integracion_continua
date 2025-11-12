@@ -88,6 +88,22 @@ export default [
     },
   },
 
+  // Overrides para archivos de mocks
+  {
+    files: ["src/__mocks__/**"],
+    languageOptions: {
+      sourceType: "module",
+      globals: {
+        module: "readonly",
+        require: "readonly",
+        exports: "readonly",
+      },
+    },
+    rules: {
+      "no-undef": "off",
+    },
+  },
+
   // Overrides para configs ESM
   {
     files: ["eslint.config.js", "jest.config.js"],

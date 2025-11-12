@@ -3,9 +3,12 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 interface ScoreContextType {
   totalScore: number;
   visitedModules: Set<string>;
+  // eslint-disable-next-line no-unused-vars
   addScore: (points: number) => void;
   resetScore: () => void;
+  // eslint-disable-next-line no-unused-vars
   markModuleAsRead: (moduleId: string) => void;
+  // eslint-disable-next-line no-unused-vars
   isModuleRead: (moduleId: string) => boolean;
 }
 
