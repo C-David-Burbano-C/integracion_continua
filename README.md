@@ -1,33 +1,33 @@
-# 🧮 Colegio Mentes Creativas - Aplicación Educativa
+# Colegio Mentes Creativas - Aplicación Educativa
 
-## 📚 Descripción del Proyecto
+## Descripción del Proyecto
 
 **Colegio Mentes Creativas** es una aplicación educativa interactiva desarrollada con React y TypeScript, diseñada para estudiantes de educación básica. La plataforma ofrece contenido multimedia y evaluaciones interactivas en tres áreas fundamentales del aprendizaje:
 
-### 🎯 Áreas de Aprendizaje
-- **🧮 Matemáticas**: Conceptos fundamentales con ejercicios prácticos
-- **🧪 Ciencias Naturales**: Exploración del mundo natural
-- **🧩 Pensamiento Lógico**: Desarrollo del razonamiento crítico
+### Áreas de Aprendizaje
+- **Matemáticas**: Conceptos fundamentales con ejercicios prácticos
+- **Ciencias Naturales**: Exploración del mundo natural
+- **Pensamiento Lógico**: Desarrollo del razonamiento crítico
 
-### ✨ Características Principales
-- 📊 **Sistema de Puntuación Global**: Seguimiento del progreso del estudiante
-- 🎮 **Quizzes Interactivos**: Evaluaciones de 3 preguntas por materia
-- 📱 **Diseño Responsive**: Optimizado para dispositivos móviles y desktop
-- 🌙 **Tema Oscuro/Claro**: Adaptable a preferencias del usuario
-- ♿ **Accesibilidad**: Cumple estándares WCAG para inclusión
-- ⚡ **Performance Optimizado**: Carga rápida y experiencia fluida
+### Características Principales
+- **Sistema de Puntuación Global**: Seguimiento del progreso del estudiante
+- **Quizzes Interactivos**: Evaluaciones de 3 preguntas por materia
+- **Diseño Responsive**: Optimizado para dispositivos móviles y desktop
+- **Tema Oscuro/Claro**: Adaptable a preferencias del usuario
+- **Accesibilidad**: Cumple estándares WCAG para inclusión
+- **Performance Optimizado**: Carga rápida y experiencia fluida
 
 ---
 
-## 🏆 Estándares de Calidad - ISO/IEC 25010
+## Estándares de Calidad - ISO/IEC 25010
 
-### 📊 Métricas Implementadas
+### Métricas Implementadas
 - **Usabilidad (Operabilidad)**: Navegación intuitiva y feedback visual claro
 - **Confiabilidad (Madurez)**: Cobertura de tests >80% con CI/CD robusto
 - **Mantenibilidad**: Código modular con TypeScript y buenas prácticas
 - **Portabilidad**: Funciona en múltiples navegadores y dispositivos
 
-**📈 Scores de Calidad Actuales:**
+**Scores de Calidad Actuales:**
 - Lighthouse Performance: >80
 - Cobertura de Tests: 85%+
 - Tiempo de Carga: <2s
@@ -35,14 +35,14 @@
 
 ---
 
-## 🚀 Inicio Rápido
+## Inicio Rápido
 
-### 📋 Prerrequisitos
+### Prerrequisitos
 - **Node.js**: v18.x o superior
 - **npm**: v8.x o superior
 - **Git**: Para control de versiones
 
-### 🛠️ Instalación
+### Instalación
 
 ```bash
 # Clonar el repositorio
@@ -53,7 +53,7 @@ cd integracion_continua
 npm install
 ```
 
-### 🎮 Ejecutar en Desarrollo
+### Ejecutar en Desarrollo
 
 ```bash
 # Iniciar servidor de desarrollo
@@ -62,7 +62,7 @@ npm run dev
 
 La aplicación estará disponible en: `http://localhost:5173`
 
-### 🧪 Ejecutar Tests
+### Ejecutar Tests
 
 ```bash
 # Tests unitarios con cobertura
@@ -75,7 +75,7 @@ npm run test:integration
 npm run test:prod
 ```
 
-### 📦 Build de Producción
+### Build de Producción
 
 ```bash
 # Generar build optimizado
@@ -111,9 +111,9 @@ src/
 
 ---
 
-## 🧪 Testing y Calidad
+## Testing y Calidad
 
-### 📊 Cobertura de Tests
+### Cobertura de Tests
 ```
 Statements   : 87%
 Branches     : 82%
@@ -121,7 +121,7 @@ Functions    : 91%
 Lines        : 86%
 ```
 
-### 🛠️ Scripts de Testing
+### Scripts de Testing
 
 ```bash
 # Análisis de tipos TypeScript
@@ -134,58 +134,58 @@ npm run lint
 npm run format
 ```
 
-### 🔄 CI/CD Pipeline
+### CI/CD Pipeline
 
 **GitHub Actions incluye:**
-- ✅ **Build Validation**: Compilación en Node 18.x y 20.x
-- ✅ **Unit Tests**: Ejecución automática con cobertura
-- ✅ **Integration Tests**: Validación de flujos completos
-- ✅ **Performance Tests**: Lighthouse CI audit
-- ✅ **Security Scan**: Análisis de vulnerabilidades
-- ✅ **Quality Gates**: Validación ISO/IEC 25010
+- **Build Validation**: Compilación en Node 18.x y 20.x
+- **Unit Tests**: Ejecución automática con cobertura
+- **Integration Tests**: Validación de flujos completos
+- **Performance Tests**: Lighthouse CI audit
+- **Security Scan**: Análisis de vulnerabilidades
+- **Quality Gates**: Validación ISO/IEC 25010
 
 ---
 
-## 📚 Contenido Educativo
+## Contenido Educativo
 
-### 🧮 Matemáticas
+### Matemáticas
 - Suma y resta avanzada
 - Geometría básica
 - Problemas aplicados
 
-### 🧪 Ciencias Naturales
+### Ciencias Naturales
 - Ecosistemas y biodiversidad
 - Procesos físicos y químicos
 - Observación científica
 
-### 🧩 Pensamiento Lógico
+### Pensamiento Lógico
 - Patrones y secuencias
 - Resolución de problemas
 - Razonamiento deductivo
 
 Cada sección incluye:
-- 📖 **Contenido Teórico**: Explicaciones claras
-- 🎥 **Recursos Multimedia**: Videos y animaciones
-- ❓ **Quiz Interactivo**: 3 preguntas de evaluación
-- 📊 **Scoring**: Puntuación por respuestas correctas
+- **Contenido Teórico**: Explicaciones claras
+- **Recursos Multimedia**: Videos y animaciones
+- **Quiz Interactivo**: 3 preguntas de evaluación
+- **Scoring**: Puntuación por respuestas correctas
 
 ---
 
-## 🏗️ Stack Tecnológico
+## Stack Tecnológico
 
-### 🎨 Frontend
+### Frontend
 - **React 19.1.1** - Framework principal
 - **TypeScript** - Tipado estático
 - **Vite** - Build tool ultrarrápido
 - **TailwindCSS** - Framework de estilos
 - **Framer Motion** - Animaciones fluidas
 
-### 🧪 Testing
+### Testing
 - **Jest** - Framework de testing
 - **React Testing Library** - Tests de componentes
 - **jsdom** - Entorno de navegador simulado
 
-### 🔧 DevOps
+### DevOps
 - **ESLint** - Linting y calidad de código
 - **Prettier** - Formateo automático
 - **GitHub Actions** - CI/CD pipeline
@@ -193,39 +193,40 @@ Cada sección incluye:
 
 ---
 
-## 📖 Documentación
+## Documentación
 
-### 📋 Documentos de Calidad
+### Documentos de Calidad
 - **[CALIDAD.md](./CALIDAD.md)** - Métricas ISO/IEC 25010 detalladas
 - **[CHECKLIST.md](./CHECKLIST.md)** - Criterios de aceptación verificados
+- **[REQUISITOS.md](./REQUISITOS.md)** - Especificación funcional completa
 
-### 🧪 Testing Documentation
+### Testing Documentation
 - **Postman Collection**: `Postman_collection.json`
 - **JMeter Test Plan**: `JMeter_Test_Plan.jmx`
 - **Lighthouse Config**: `.lighthouserc.json`
 
-### 🚀 CI/CD
+### CI/CD
 - **GitHub Actions**: `.github/workflows/ci.yml`
 - **Quality Gates**: Validaciones automáticas
 - **Performance Monitoring**: Métricas continuas
 
 ---
 
-## 🌟 Características Avanzadas
+## Características Avanzadas
 
-### ♿ Accesibilidad
+### Accesibilidad
 - Navegación por teclado completa
 - Lectores de pantalla compatibles
 - Contraste de colores adecuado
 - Etiquetas ARIA implementadas
 
-### 📱 Responsive Design
+### Responsive Design
 - Mobile-first approach
 - Breakpoints optimizados
 - Touch-friendly interfaces
 - Adaptive layouts
 
-### 🎨 UI/UX
+### UI/UX
 - Diseño moderno y limpio
 - Animaciones sutiles
 - Feedback visual inmediato
@@ -241,7 +242,7 @@ Cada sección incluye:
 3. **Commits**: Mensajes descriptivos en español
 4. **Branches**: `feature/`, `bugfix/`, `hotfix/`
 
-### 🔄 Workflow
+### Workflow de Desarrollo
 ```bash
 # Crear rama de feature
 git checkout -b feature/nueva-funcionalidad
@@ -260,15 +261,15 @@ git push origin feature/nueva-funcionalidad
 
 ---
 
-## 📊 Métricas y Monitoreo
+## Métricas y Monitoreo
 
-### 🎯 KPIs de Calidad
+### KPIs de Calidad
 - **Performance**: Lighthouse Score > 80
 - **Accessibility**: WCAG AA Compliance
 - **SEO**: Indexación optimizada
 - **User Experience**: Tiempo de carga < 2s
 
-### 📈 Dashboard de Calidad
+### Dashboard de Calidad
 - Tests Coverage: 85%+
 - CI/CD Success Rate: >95%
 - Performance Budget: Cumplido
@@ -276,9 +277,9 @@ git push origin feature/nueva-funcionalidad
 
 ---
 
-## 🐛 Solución de Problemas
+## Solución de Problemas
 
-### ❌ Errores Comunes
+### Errores Comunes
 
 **Tests fallan:**
 ```bash
@@ -321,15 +322,15 @@ Este proyecto es desarrollado para **Colegio Mentes Creativas** como parte del p
 
 ---
 
-## 🎉 Validación Final
+## Validación Final
 
-✅ **PROYECTO APROBADO** - Cumple 100% de criterios de aceptación
+**PROYECTO APROBADO** - Cumple 100% de criterios de aceptación
 
-- 🧪 **Testing Completo**: Unit, Integration, System, Acceptance
-- 🚀 **CI/CD Robusto**: GitHub Actions con quality gates
-- 📊 **ISO/IEC 25010**: Usabilidad y Confiabilidad verificadas
-- 📚 **Documentación Completa**: CALIDAD.md y CHECKLIST.md
-- 🎯 **Funcionalidad 100%**: Todas las features implementadas
+- **Testing Completo**: Unit, Integration, System, Acceptance
+- **CI/CD Robusto**: GitHub Actions con quality gates
+- **ISO/IEC 25010**: Usabilidad y Confiabilidad verificadas
+- **Documentación Completa**: CALIDAD.md y CHECKLIST.md
+- **Funcionalidad 100%**: Todas las features implementadas
 
-**🚀 Listo para producción y despliegue educativo!**
+**Listo para producción y despliegue educativo!**
 
