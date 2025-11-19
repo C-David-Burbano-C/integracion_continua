@@ -392,7 +392,7 @@ export default function RobotSimulator() {
       </div>
 
       {/* Sección de Narración con IA */}
-      <div className="bg-gradient-to-r from-purple-50 via-indigo-50 to-pink-50 dark:from-purple-900/20 dark:via-indigo-900/20 dark:to-pink-900/20 rounded-xl p-6 mb-6">
+      <div id="puntos-robots" className="bg-gradient-to-r from-purple-50 via-indigo-50 to-pink-50 dark:from-purple-900/20 dark:via-indigo-900/20 dark:to-pink-900/20 rounded-xl p-6 mb-6">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-12 h-12 bg-gradient-to-r from-purple-500 via-indigo-500 to-pink-500 rounded-full flex items-center justify-center animate-bounce">
             <MicrophoneIcon size={24} className="text-white" />

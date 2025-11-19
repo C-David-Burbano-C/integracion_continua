@@ -9,19 +9,25 @@ interface CesiumGlobeProps {
 export default function CesiumGlobe({ kmlUrl = '/assets/earth/globo-terraqueo.kml' }: CesiumGlobeProps) {
   const cesiumContainer = useRef<HTMLDivElement>(null);
   const viewerRef = useRef<Cesium.Viewer | null>(null);
+  const doubleClickHandlerRef = useRef<Cesium.ScreenSpaceEventHandler | null>(null);
+  const buildModuleUrl = Cesium.buildModuleUrl as typeof Cesium.buildModuleUrl & {
+    setBaseUrl?: (baseUrl: string) => void;
+  };
 
   useEffect(() => {
-    if (!cesiumContainer.current) return;
+    if (!cesiumContainer.current) return undefined;
 
-    // Set Cesium base URL for assets
+    let isDisposed = false;
+
     (window as any).CESIUM_BASE_URL = '/assets/cesium';
-    
-    // Disable Cesium Ion token requirement
-    Cesium.Ion.defaultAccessToken = '';
+    if (typeof buildModuleUrl.setBaseUrl === 'function') {
+      buildModuleUrl.setBaseUrl('/assets/cesium/');
+    }
+    Cesium.Ion.defaultAccessToken = undefined as unknown as string;
 
-    // Create the Cesium Viewer with high quality settings
     const viewer = new Cesium.Viewer(cesiumContainer.current, {
-      terrainProvider: undefined, // No terrain to avoid token issues
+      terrainProvider: undefined,
+      imageryProvider: false as unknown as Cesium.ImageryProvider,
       baseLayerPicker: false,
       geocoder: true,
       homeButton: true,
@@ -33,43 +39,99 @@ export default function CesiumGlobe({ kmlUrl = '/assets/earth/globo-terraqueo.km
       vrButton: false
     });
 
-    // Async function to set up imagery provider
-    const setupImagery = async () => {
-      try {
-        viewer.imageryLayers.removeAll();
-        const imageryProvider = await Cesium.createWorldImageryAsync();
-        viewer.imageryLayers.addImageryProvider(imageryProvider);
-      } catch (error) {
-        console.warn('Error loading world imagery, falling back to OpenStreetMap:', error);
-        viewer.imageryLayers.removeAll();
-        viewer.imageryLayers.addImageryProvider(
-          new Cesium.OpenStreetMapImageryProvider({
-            url: 'https://a.tile.openstreetmap.org/'
-          })
-        );
+    const enhanceScene = () => {
+      if (viewer.scene.globe) {
+        viewer.scene.globe.enableLighting = true;
+        viewer.scene.globe.dynamicAtmosphereLighting = true;
+        viewer.scene.globe.dynamicAtmosphereLightingFromSun = true;
+        viewer.scene.globe.maximumScreenSpaceError = 1.0;
       }
 
-      // Add enhanced visual effects for more realistic appearance
-      viewer.scene.globe.enableLighting = true;
-      viewer.scene.globe.dynamicAtmosphereLighting = true;
-      viewer.scene.globe.dynamicAtmosphereLightingFromSun = true;
-      
       if (viewer.scene.sun) viewer.scene.sun.show = true;
       if (viewer.scene.moon) viewer.scene.moon.show = true;
       if (viewer.scene.skyBox) viewer.scene.skyBox.show = true;
       if (viewer.scene.skyAtmosphere) viewer.scene.skyAtmosphere.show = true;
-      
-      if (viewer.scene.fog) viewer.scene.fog.enabled = false; // Disable fog for clearer view
-      viewer.scene.backgroundColor = Cesium.Color.BLACK; // Space background
+      if (viewer.scene.fog) viewer.scene.fog.enabled = false;
 
-      // Improve rendering quality
-      viewer.scene.globe.maximumScreenSpaceError = 1.0; // Higher quality
-      if (viewer.scene.postProcessStages && viewer.scene.postProcessStages.fxaa) {
-        viewer.scene.postProcessStages.fxaa.enabled = true; // Anti-aliasing
+      viewer.scene.backgroundColor = Cesium.Color.BLACK;
+      if (viewer.scene.postProcessStages?.fxaa) {
+        viewer.scene.postProcessStages.fxaa.enabled = true;
       }
     };
 
-    setupImagery();
+    enhanceScene();
+
+    const enableCinematicFlights = () => {
+      if (!viewer.scene?.canvas) return;
+
+      viewer.cesiumWidget?.screenSpaceEventHandler?.removeInputAction(
+        Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
+      );
+
+      const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+      doubleClickHandlerRef.current = handler;
+
+      handler.setInputAction(
+        (click: Cesium.ScreenSpaceEventHandler.PositionedEvent) => {
+          if (!click?.position) return;
+          const ellipsoid = viewer.scene.globe?.ellipsoid ?? Cesium.Ellipsoid.WGS84;
+          const cartesian = viewer.camera.pickEllipsoid?.(click.position, ellipsoid);
+          if (!cartesian) return;
+
+          const cartographic = Cesium.Ellipsoid.WGS84.cartesianToCartographic(cartesian);
+          if (!cartographic) return;
+
+          viewer.camera.flyTo({
+            destination: Cesium.Cartesian3.fromRadians(
+              cartographic.longitude,
+              cartographic.latitude,
+              1200000
+            ),
+            orientation: {
+              heading: viewer.camera.heading,
+              pitch: Cesium.Math.toRadians(-30),
+              roll: 0
+            },
+            duration: 2.5
+          });
+        },
+        Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
+      );
+    };
+
+    enableCinematicFlights();
+
+    const loadDefaultImagery = async () => {
+      try {
+        const arcgisProvider = await Cesium.ArcGisMapServerImageryProvider.fromUrl(
+          'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
+          { enablePickFeatures: false }
+        );
+
+        if (isDisposed || viewer.isDestroyed()) return;
+
+        viewer.imageryLayers.removeAll();
+        const baseLayer = viewer.imageryLayers.addImageryProvider(arcgisProvider);
+        baseLayer.brightness = 1.2;
+        baseLayer.contrast = 1.15;
+      } catch (error) {
+        console.error('Error cargando la textura en alta resolución:', error);
+        try {
+          const fallbackProvider = await Cesium.TileMapServiceImageryProvider.fromUrl(
+            buildModuleUrl('Assets/Textures/NaturalEarthII')
+          );
+
+          if (isDisposed || viewer.isDestroyed()) return;
+
+          viewer.imageryLayers.removeAll();
+          viewer.imageryLayers.addImageryProvider(fallbackProvider);
+        } catch (fallbackError) {
+          console.error('Error cargando la textura de respaldo:', fallbackError);
+        }
+      }
+    };
+
+    loadDefaultImagery();
 
     // Prevent zooming inside the Earth
     viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1000000; // 1 million meters
@@ -90,17 +152,14 @@ export default function CesiumGlobe({ kmlUrl = '/assets/earth/globo-terraqueo.km
           canvas: viewer.scene.canvas
         });
 
+        if (isDisposed || viewer.isDestroyed()) return;
+
+        viewer.dataSources.removeAll();
         await viewer.dataSources.add(kmlDataSource);
-        await viewer.flyTo(kmlDataSource);
 
         console.log('KML cargado exitosamente');
       } catch (error) {
         console.error('Error cargando el archivo KML:', error);
-        
-        // Fallback: fly to a default location (Colombia)
-        viewer.camera.flyTo({
-          destination: Cesium.Cartesian3.fromDegrees(-74.0721, 4.7110, 20000000)
-        });
       }
     };
 
@@ -108,6 +167,11 @@ export default function CesiumGlobe({ kmlUrl = '/assets/earth/globo-terraqueo.km
 
     // Cleanup
     return () => {
+      isDisposed = true;
+      if (doubleClickHandlerRef.current) {
+        doubleClickHandlerRef.current.destroy();
+        doubleClickHandlerRef.current = null;
+      }
       if (viewerRef.current) {
         viewerRef.current.destroy();
         viewerRef.current = null;

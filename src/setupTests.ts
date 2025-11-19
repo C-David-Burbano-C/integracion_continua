@@ -63,14 +63,46 @@ jest.mock('cesium', () => ({
   Ion: {
     defaultAccessToken: '',
   },
+  buildModuleUrl: jest.fn((relativePath: string) => relativePath),
+  TileMapServiceImageryProvider: {
+    fromUrl: jest.fn().mockResolvedValue({}),
+  },
+  ArcGisMapServerImageryProvider: {
+    fromUrl: jest.fn().mockResolvedValue({}),
+  },
+  ScreenSpaceEventType: {
+    LEFT_DOUBLE_CLICK: 'LEFT_DOUBLE_CLICK',
+  },
+  ScreenSpaceEventHandler: jest.fn().mockImplementation(() => ({
+    setInputAction: jest.fn(),
+    destroy: jest.fn(),
+  })),
+  Ellipsoid: {
+    WGS84: {
+      cartesianToCartographic: jest.fn().mockReturnValue({
+        longitude: 0,
+        latitude: 0,
+      }),
+    },
+  },
+  Math: {
+    toRadians: (degrees: number) => (degrees * Math.PI) / 180,
+  },
   Viewer: jest.fn().mockImplementation(() => ({
     destroy: jest.fn(),
+    isDestroyed: jest.fn().mockReturnValue(false),
+    cesiumWidget: {
+      screenSpaceEventHandler: {
+        removeInputAction: jest.fn(),
+      },
+    },
     scene: {
       globe: {
         enableLighting: true,
         dynamicAtmosphereLighting: true,
         dynamicAtmosphereLightingFromSun: true,
         maximumScreenSpaceError: 1.0,
+        ellipsoid: {},
       },
       sun: { show: true },
       moon: { show: true },
@@ -85,6 +117,7 @@ jest.mock('cesium', () => ({
       camera: {
         setView: jest.fn(),
         flyTo: jest.fn(),
+        pickEllipsoid: jest.fn().mockReturnValue({}),
       },
       canvas: {},
       postProcessStages: {
@@ -94,21 +127,28 @@ jest.mock('cesium', () => ({
     camera: {
       setView: jest.fn(),
       flyTo: jest.fn(),
+      heading: 0,
+      pickEllipsoid: jest.fn().mockReturnValue({}),
     },
     entities: {
       add: jest.fn(),
     },
     dataSources: {
       add: jest.fn(),
+      removeAll: jest.fn(),
     },
     flyTo: jest.fn(),
     imageryLayers: {
       removeAll: jest.fn(),
-      addImageryProvider: jest.fn(),
+      addImageryProvider: jest.fn().mockReturnValue({
+        brightness: 1,
+        contrast: 1,
+      }),
     },
   })),
   Cartesian3: {
     fromDegrees: jest.fn(),
+    fromRadians: jest.fn(),
   },
   Color: {
     RED: {},

@@ -143,7 +143,7 @@ export default function SolarSystemViewer() {
       </div>
 
       {/* Sección de Narración con IA */}
-      <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl p-6 mb-6">
+      <div id="puntos-sistema-solar" className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl p-6 mb-6">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
             <MicrophoneIcon size={20} className="text-white" />
