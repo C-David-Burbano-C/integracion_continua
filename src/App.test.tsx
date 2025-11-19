@@ -10,5 +10,5 @@ test("renderiza el título principal", () => {
   );
   // Buscar específicamente el elemento h1 con el título principal
   const titleElement = screen.getByRole('heading', { level: 1 });
-  expect(titleElement).toHaveTextContent(/Exploradores del Conocimiento/i);
+  expect(titleElement).toHaveTextContent(/Exploradores del Conocimiento ERROR/i);
 });
