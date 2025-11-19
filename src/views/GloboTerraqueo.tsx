@@ -1,7 +1,27 @@
 ﻿import { GlobeIcon } from '../components/icons';
 import CesiumGlobe from '../components/CesiumGlobe';
+import { useNarrator } from '../hooks/useNarrator';
+import { getRandomEarthCuriosity, getCuriositiesByCategory, type EarthCuriosity } from '../data/earthCuriosities';
+import { MicrophoneIcon, StarIcon, SpeakerIcon, DiceIcon, StopIcon, LightbulbIcon } from '../components/icons/NarratorIcons';
+import { useState } from 'react';
 
 export default function GloboTerraqueo() {
+  const { speak, stop, isSpeaking, currentText } = useNarrator();
+  const [selectedCategory, setSelectedCategory] = useState<EarthCuriosity['category'] | null>(null);
+
+  const handleNarrateCuriosity = (curiosity: EarthCuriosity) => {
+    speak(curiosity.text, {
+      points: curiosity.points,
+      onComplete: () => {
+        console.log(`¡Narración completada! Ganaste ${curiosity.points} puntos por aprender sobre ${curiosity.title}`);
+      }
+    });
+  };
+
+  const handleRandomCuriosity = () => {
+    const curiosity = getRandomEarthCuriosity();
+    handleNarrateCuriosity(curiosity);
+  };
   return (
     <div className="p-6 max-w-6xl mx-auto">
       <div className="mb-6">
@@ -188,6 +208,145 @@ export default function GloboTerraqueo() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Sección de Narración con IA */}
+      <div className="bg-gradient-to-r from-blue-50 via-cyan-50 to-teal-50 dark:from-blue-900/20 dark:via-cyan-900/20 dark:to-teal-900/20 rounded-xl p-6">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-12 h-12 bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 rounded-full flex items-center justify-center animate-bounce">
+            <MicrophoneIcon size={24} className="text-white" />
+          </div>
+          <div>
+            <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+              ¡Narrador Terrestre Mágico! 🌍
+              <span className="text-3xl animate-pulse">✨</span>
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400 flex items-center gap-1">
+              ¡Descubre datos CHEVRES sobre la Tierra y gana puntos!
+              <StarIcon size={16} className="text-yellow-500 animate-spin" />
+            </p>
+          </div>
+        </div>
+
+        {isSpeaking && (
+          <div className="mb-6 p-4 bg-gradient-to-r from-cyan-100 to-blue-100 dark:from-cyan-900/30 dark:to-blue-900/30 rounded-lg border-l-4 border-cyan-500 animate-pulse">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-4 h-4 bg-red-500 rounded-full animate-ping"></div>
+              <span className="font-bold text-cyan-800 dark:text-cyan-200 text-lg">¡Narrando...!</span>
+            </div>
+            <p className="text-sm text-cyan-700 dark:text-cyan-300 font-medium">{currentText}</p>
+          </div>
+        )}
+
+        {/* Categorías */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+          {[
+            { id: 'oceano' as const, name: 'Océanos Profundos', color: 'from-blue-400 to-cyan-500', emoji: '🌊' },
+            { id: 'continente' as const, name: 'Continentes', color: 'from-green-400 to-emerald-500', emoji: '🌍' },
+            { id: 'clima' as const, name: 'Climas Extremos', color: 'from-orange-400 to-red-500', emoji: '🌡️' },
+            { id: 'biodiversidad' as const, name: 'Biodiversidad', color: 'from-purple-400 to-pink-500', emoji: '🦋' },
+            { id: 'historia' as const, name: 'Historia Geológica', color: 'from-yellow-400 to-amber-500', emoji: '⏳' },
+            { id: 'geografia' as const, name: 'Geografía', color: 'from-indigo-400 to-blue-500', emoji: '🏔️' }
+          ].map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setSelectedCategory(selectedCategory === category.id ? null : category.id)}
+              className={`p-4 bg-gradient-to-r ${category.color} hover:scale-105 transition-all duration-300 rounded-xl shadow-lg text-white font-bold text-center transform hover:shadow-xl`}
+            >
+              <div className="text-3xl mb-2">{category.emoji}</div>
+              <div className="text-sm">{category.name}</div>
+            </button>
+          ))}
+        </div>
+
+        {/* Curiosidades por categoría */}
+        {selectedCategory && (
+          <div className="mb-6">
+            <h4 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-100 flex items-center gap-2">
+              {[
+                { id: 'oceano', emoji: '🌊', name: 'Océanos Profundos' },
+                { id: 'continente', emoji: '🌍', name: 'Continentes' },
+                { id: 'clima', emoji: '🌡️', name: 'Climas Extremos' },
+                { id: 'biodiversidad', emoji: '🦋', name: 'Biodiversidad' },
+                { id: 'historia', emoji: '⏳', name: 'Historia Geológica' },
+                { id: 'geografia', emoji: '🏔️', name: 'Geografía' }
+              ].find(c => c.id === selectedCategory)?.emoji}
+              {[
+                { id: 'oceano', emoji: '🌊', name: 'Océanos Profundos' },
+                { id: 'continente', emoji: '🌍', name: 'Continentes' },
+                { id: 'clima', emoji: '🌡️', name: 'Climas Extremos' },
+                { id: 'biodiversidad', emoji: '🦋', name: 'Biodiversidad' },
+                { id: 'historia', emoji: '⏳', name: 'Historia Geológica' },
+                { id: 'geografia', emoji: '🏔️', name: 'Geografía' }
+              ].find(c => c.id === selectedCategory)?.name}
+            </h4>
+            <div className="grid md:grid-cols-2 gap-3">
+              {getCuriositiesByCategory(selectedCategory).map((curiosity) => (
+                <button
+                  key={curiosity.id}
+                  onClick={() => handleNarrateCuriosity(curiosity)}
+                  disabled={isSpeaking}
+                  className="p-4 bg-white dark:bg-slate-800 rounded-lg border-2 border-slate-200 dark:border-slate-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-cyan-50 dark:hover:from-blue-900/20 dark:hover:to-cyan-900/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:scale-102"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-2xl">{curiosity.emoji}</div>
+                    <div className="flex items-center gap-1 bg-gradient-to-r from-blue-400 to-cyan-500 text-white px-2 py-1 rounded-full text-xs font-bold">
+                      <StarIcon size={12} className="text-white" />
+                      +{curiosity.points}
+                    </div>
+                  </div>
+                  <div className="text-left">
+                    <div className="font-semibold text-slate-800 dark:text-slate-100 text-sm mb-1">
+                      {curiosity.title}
+                    </div>
+                    <div className="flex items-center gap-1 text-cyan-500">
+                      <SpeakerIcon size={14} className="text-cyan-500" />
+                      <span className="text-xs font-medium">¡Escuchar!</span>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Curiosidad aleatoria */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          <button
+            onClick={handleRandomCuriosity}
+            disabled={isSpeaking}
+            className="flex-1 p-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 hover:from-cyan-600 hover:via-blue-600 hover:to-indigo-600 text-white rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-105"
+          >
+            <div className="flex items-center justify-center gap-3">
+              <DiceIcon size={28} className="text-white animate-spin" />
+              <div className="text-left">
+                <div className="font-bold text-lg">¡SORPRESA!</div>
+                <div className="text-sm opacity-90">Curiosidad Aleatoria</div>
+                <div className="text-xs opacity-75">+8-20 puntos</div>
+              </div>
+            </div>
+          </button>
+
+          {isSpeaking && (
+            <button
+              onClick={stop}
+              className="p-4 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              <div className="flex items-center justify-center gap-2">
+                <StopIcon size={20} className="text-white" />
+                <span className="font-bold">¡Detener!</span>
+              </div>
+            </button>
+          )}
+        </div>
+
+        <div className="text-center text-sm text-slate-600 dark:text-slate-400 mt-4">
+          <p className="flex items-center justify-center gap-2">
+            <LightbulbIcon size={16} className="text-yellow-500 animate-pulse" />
+            <strong className="text-cyan-600 dark:text-cyan-400">¡CONSEJO CHEVRE!</strong>
+            <span>Escucha todas las curiosidades para convertirte en un experto de la Tierra y ganar montones de puntos. ¡Es como una aventura alrededor del mundo! 🌍✨</span>
+          </p>
         </div>
       </div>
     </div>

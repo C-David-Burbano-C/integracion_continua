@@ -2,6 +2,9 @@ import { useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Box, Sphere, Cylinder } from '@react-three/drei';
 import { RobotIcon } from './icons';
+import { useNarrator } from '../hooks/useNarrator';
+import { getRandomRobotCuriosity, getCuriositiesByCategory, type RobotCuriosity } from '../data/robotCuriosities';
+import { MicrophoneIcon, StarIcon, SpeakerIcon, DiceIcon, StopIcon, LightbulbIcon } from './icons/NarratorIcons';
 import * as THREE from 'three';
 
 interface RobotConfig {
@@ -231,6 +234,22 @@ function DroneRobot({ color, isActive }: { color: string; isActive: boolean }) {
 export default function RobotSimulator() {
   const [selectedRobot, setSelectedRobot] = useState<RobotConfig>(robotTypes[0]);
   const [isActive, setIsActive] = useState(true);
+  const { speak, stop, isSpeaking, currentText } = useNarrator();
+  const [selectedCategory, setSelectedCategory] = useState<RobotCuriosity['category'] | null>(null);
+
+  const handleNarrateCuriosity = (curiosity: RobotCuriosity) => {
+    speak(curiosity.text, {
+      points: curiosity.points,
+      onComplete: () => {
+        console.log(`¡Narración completada! Ganaste ${curiosity.points} puntos por aprender sobre ${curiosity.title}`);
+      }
+    });
+  };
+
+  const handleRandomCuriosity = () => {
+    const curiosity = getRandomRobotCuriosity();
+    handleNarrateCuriosity(curiosity);
+  };
 
   const renderRobot = () => {
     switch (selectedRobot.name) {
@@ -369,6 +388,145 @@ export default function RobotSimulator() {
             <h4 className="font-semibold mb-2">Hogar</h4>
             <p className="text-sm">Aspiradoras, asistentes y robots de compañía.</p>
           </div>
+        </div>
+      </div>
+
+      {/* Sección de Narración con IA */}
+      <div className="bg-gradient-to-r from-purple-50 via-indigo-50 to-pink-50 dark:from-purple-900/20 dark:via-indigo-900/20 dark:to-pink-900/20 rounded-xl p-6 mb-6">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-12 h-12 bg-gradient-to-r from-purple-500 via-indigo-500 to-pink-500 rounded-full flex items-center justify-center animate-bounce">
+            <MicrophoneIcon size={24} className="text-white" />
+          </div>
+          <div>
+            <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+              ¡Narrador Robótico Inteligente! 🤖
+              <span className="text-3xl animate-pulse">⚡</span>
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400 flex items-center gap-1">
+              ¡Descubre datos CHEVRES sobre robots y gana puntos!
+              <StarIcon size={16} className="text-yellow-500 animate-spin" />
+            </p>
+          </div>
+        </div>
+
+        {isSpeaking && (
+          <div className="mb-6 p-4 bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30 rounded-lg border-l-4 border-indigo-500 animate-pulse">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-4 h-4 bg-red-500 rounded-full animate-ping"></div>
+              <span className="font-bold text-indigo-800 dark:text-indigo-200 text-lg">¡Narrando...!</span>
+            </div>
+            <p className="text-sm text-indigo-700 dark:text-indigo-300 font-medium">{currentText}</p>
+          </div>
+        )}
+
+        {/* Categorías */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+          {[
+            { id: 'explorador' as const, name: 'Robots Exploradores', color: 'from-blue-400 to-cyan-500', emoji: '🚗' },
+            { id: 'industrial' as const, name: 'Robots Industriales', color: 'from-orange-400 to-red-500', emoji: '🏭' },
+            { id: 'humanoide' as const, name: 'Robots Humanoides', color: 'from-green-400 to-emerald-500', emoji: '🤖' },
+            { id: 'dron' as const, name: 'Drones y Voladores', color: 'from-purple-400 to-pink-500', emoji: '🚁' },
+            { id: 'historia' as const, name: 'Historia de Robots', color: 'from-yellow-400 to-amber-500', emoji: '📚' },
+            { id: 'futuro' as const, name: 'Futuro Robótico', color: 'from-indigo-400 to-blue-500', emoji: '🔮' }
+          ].map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setSelectedCategory(selectedCategory === category.id ? null : category.id)}
+              className={`p-4 bg-gradient-to-r ${category.color} hover:scale-105 transition-all duration-300 rounded-xl shadow-lg text-white font-bold text-center transform hover:shadow-xl`}
+            >
+              <div className="text-3xl mb-2">{category.emoji}</div>
+              <div className="text-sm">{category.name}</div>
+            </button>
+          ))}
+        </div>
+
+        {/* Curiosidades por categoría */}
+        {selectedCategory && (
+          <div className="mb-6">
+            <h4 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-100 flex items-center gap-2">
+              {[
+                { id: 'explorador', emoji: '🚗', name: 'Robots Exploradores' },
+                { id: 'industrial', emoji: '🏭', name: 'Robots Industriales' },
+                { id: 'humanoide', emoji: '🤖', name: 'Robots Humanoides' },
+                { id: 'dron', emoji: '🚁', name: 'Drones y Voladores' },
+                { id: 'historia', emoji: '📚', name: 'Historia de Robots' },
+                { id: 'futuro', emoji: '🔮', name: 'Futuro Robótico' }
+              ].find(c => c.id === selectedCategory)?.emoji}
+              {[
+                { id: 'explorador', emoji: '🚗', name: 'Robots Exploradores' },
+                { id: 'industrial', emoji: '🏭', name: 'Robots Industriales' },
+                { id: 'humanoide', emoji: '🤖', name: 'Robots Humanoides' },
+                { id: 'dron', emoji: '🚁', name: 'Drones y Voladores' },
+                { id: 'historia', emoji: '📚', name: 'Historia de Robots' },
+                { id: 'futuro', emoji: '🔮', name: 'Futuro Robótico' }
+              ].find(c => c.id === selectedCategory)?.name}
+            </h4>
+            <div className="grid md:grid-cols-2 gap-3">
+              {getCuriositiesByCategory(selectedCategory).map((curiosity) => (
+                <button
+                  key={curiosity.id}
+                  onClick={() => handleNarrateCuriosity(curiosity)}
+                  disabled={isSpeaking}
+                  className="p-4 bg-white dark:bg-slate-800 rounded-lg border-2 border-slate-200 dark:border-slate-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-indigo-50 dark:hover:from-purple-900/20 dark:hover:to-indigo-900/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:scale-102"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-2xl">{curiosity.emoji}</div>
+                    <div className="flex items-center gap-1 bg-gradient-to-r from-purple-400 to-indigo-500 text-white px-2 py-1 rounded-full text-xs font-bold">
+                      <StarIcon size={12} className="text-white" />
+                      +{curiosity.points}
+                    </div>
+                  </div>
+                  <div className="text-left">
+                    <div className="font-semibold text-slate-800 dark:text-slate-100 text-sm mb-1">
+                      {curiosity.title}
+                    </div>
+                    <div className="flex items-center gap-1 text-indigo-500">
+                      <SpeakerIcon size={14} className="text-indigo-500" />
+                      <span className="text-xs font-medium">¡Escuchar!</span>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Curiosidad aleatoria */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          <button
+            onClick={handleRandomCuriosity}
+            disabled={isSpeaking}
+            className="flex-1 p-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 text-white rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-105"
+          >
+            <div className="flex items-center justify-center gap-3">
+              <DiceIcon size={28} className="text-white animate-spin" />
+              <div className="text-left">
+                <div className="font-bold text-lg">¡SORPRESA!</div>
+                <div className="text-sm opacity-90">Curiosidad Aleatoria</div>
+                <div className="text-xs opacity-75">+8-20 puntos</div>
+              </div>
+            </div>
+          </button>
+
+          {isSpeaking && (
+            <button
+              onClick={stop}
+              className="p-4 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              <div className="flex items-center justify-center gap-2">
+                <StopIcon size={20} className="text-white" />
+                <span className="font-bold">¡Detener!</span>
+              </div>
+            </button>
+          )}
+        </div>
+
+        <div className="text-center text-sm text-slate-600 dark:text-slate-400 mt-4">
+          <p className="flex items-center justify-center gap-2">
+            <LightbulbIcon size={16} className="text-yellow-500 animate-pulse" />
+            <strong className="text-indigo-600 dark:text-indigo-400">¡CONSEJO CHEVRE!</strong>
+            <span>Escucha todas las curiosidades para convertirte en un experto en robótica y ganar montones de puntos. ¡El futuro está en tus manos! 🤖⚡</span>
+          </p>
         </div>
       </div>
     </div>

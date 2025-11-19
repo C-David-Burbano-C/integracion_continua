@@ -1,5 +1,5 @@
 ﻿import { NavLink } from 'react-router-dom';
-import { FaHome, FaSun, FaGlobe, FaMap, FaRobot } from 'react-icons/fa';
+import { FaHome, FaSun, FaGlobe, FaMap, FaRobot, FaTrophy } from 'react-icons/fa';
 
 interface SidebarItem {
   label: string;
@@ -13,6 +13,7 @@ const sidebarItems: SidebarItem[] = [
   { label: 'Mapa Colombia', route: '/mapa-colombia', icon: <FaMap /> },
   { label: 'Globo Terráqueo', route: '/globo-terraqueo', icon: <FaGlobe /> },
   { label: 'Simulación Robots', route: '/simulacion-robots', icon: <FaRobot /> },
+  { label: 'Insignias 3D', route: '/insignias', icon: <FaTrophy /> },
 ];
 
 export default function Sidebar({ onClose }: { onClose?: () => void }) {

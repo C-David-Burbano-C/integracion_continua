@@ -1,11 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { ScoreProvider } from '../context/ScoreContext';
 import GloboTerraqueo from '../views/GloboTerraqueo';
 
-// Wrapper para proporcionar el contexto de enrutamiento necesario
+// Wrapper para proporcionar el contexto de enrutamiento y puntuación necesario
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (
   <BrowserRouter>
-    {children}
+    <ScoreProvider>
+      {children}
+    </ScoreProvider>
   </BrowserRouter>
 );
 
