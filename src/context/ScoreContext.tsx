@@ -14,6 +14,8 @@ interface ScoreContextType {
 
 const ScoreContext = createContext<ScoreContextType | undefined>(undefined);
 
+export { ScoreContext };
+
 interface ScoreProviderProps {
   children: ReactNode;
 }
@@ -23,7 +25,7 @@ export const ScoreProvider: React.FC<ScoreProviderProps> = ({ children }) => {
   const [visitedModules, setVisitedModules] = useState<Set<string>>(new Set());
 
   const addScore = (points: number) => {
-    setTotalScore(prevScore => prevScore + points);
+    setTotalScore((prevScore: number) => prevScore + points);
   };
 
   const resetScore = () => {
@@ -43,10 +45,10 @@ export const ScoreProvider: React.FC<ScoreProviderProps> = ({ children }) => {
   };
 
   return (
-    <ScoreContext.Provider value={{ 
-      totalScore, 
+    <ScoreContext.Provider value={{
+      totalScore,
       visitedModules,
-      addScore, 
+      addScore,
       resetScore,
       markModuleAsRead,
       isModuleRead

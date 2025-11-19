@@ -137,27 +137,27 @@ export default function GloboTerraqueo() {
                 <div className="grid grid-cols-2 gap-2 text-sm">
                   <div className="flex items-center gap-2">
                     <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
-                    <span>África (30.3M km²)</span>
+                    <span className="text-slate-700 dark:text-slate-200">África (30.3M km²)</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
-                    <span>América (42.5M km²)</span>
+                    <span className="text-slate-700 dark:text-slate-200">América (42.5M km²)</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-3 h-3 bg-white border border-slate-400 rounded-full"></span>
-                    <span>Antártida (14.2M km²)</span>
+                    <span className="text-slate-700 dark:text-slate-200">Antártida (14.2M km²)</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-3 h-3 bg-red-500 rounded-full"></span>
-                    <span>Asia (44.6M km²)</span>
+                    <span className="text-slate-700 dark:text-slate-200">Asia (44.6M km²)</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-                    <span>Europa (10.2M km²)</span>
+                    <span className="text-slate-700 dark:text-slate-200">Europa (10.2M km²)</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-3 h-3 bg-purple-500 rounded-full"></span>
-                    <span>Oceanía (8.5M km²)</span>
+                    <span className="text-slate-700 dark:text-slate-200">Oceanía (8.5M km²)</span>
                   </div>
                 </div>
               </div>
@@ -165,24 +165,24 @@ export default function GloboTerraqueo() {
                 <h5 className="font-medium mb-2 text-slate-700 dark:text-slate-300">5 Océanos</h5>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span>🌊 Pacífico</span>
-                    <span className="text-slate-600 dark:text-slate-400">168.7M km²</span>
+                    <span className="text-slate-700 dark:text-slate-200">🌊 Pacífico</span>
+                    <span className="text-slate-600 dark:text-slate-300">168.7M km²</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>🌊 Atlántico</span>
-                    <span className="text-slate-600 dark:text-slate-400">85.1M km²</span>
+                    <span className="text-slate-700 dark:text-slate-200">🌊 Atlántico</span>
+                    <span className="text-slate-600 dark:text-slate-300">85.1M km²</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>🌊 Índico</span>
-                    <span className="text-slate-600 dark:text-slate-400">70.6M km²</span>
+                    <span className="text-slate-700 dark:text-slate-200">🌊 Índico</span>
+                    <span className="text-slate-600 dark:text-slate-300">70.6M km²</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>🌊 Ártico</span>
-                    <span className="text-slate-600 dark:text-slate-400">14.1M km²</span>
+                    <span className="text-slate-700 dark:text-slate-200">🌊 Ártico</span>
+                    <span className="text-slate-600 dark:text-slate-300">14.1M km²</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>🌊 Antártico</span>
-                    <span className="text-slate-600 dark:text-slate-400">20.3M km²</span>
+                    <span className="text-slate-700 dark:text-slate-200">🌊 Antártico</span>
+                    <span className="text-slate-600 dark:text-slate-300">20.3M km²</span>
                   </div>
                 </div>
               </div>

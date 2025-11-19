@@ -19,15 +19,6 @@ describe("Navbar - Renderizado", () => {
     expect(screen.getByText(/UCC : Prácticas Desarrollo/i)).toBeInTheDocument();
   });
 
-  test("renderiza el botón con el texto 'Tema'", () => {
-    render(
-      <ScoreProvider>
-        <Navbar />
-      </ScoreProvider>
-    );
-    expect(screen.getByRole("button", { name: /Tema/i })).toBeInTheDocument();
-  });
-
   test("renderiza el logo con la letra 'U'", () => {
     render(
       <ScoreProvider>

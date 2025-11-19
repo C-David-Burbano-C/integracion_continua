@@ -1,11 +1,14 @@
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { ScoreProvider } from '../context/ScoreContext';
 import SistemaSolar from '../views/SistemaSolar';
 
-// Wrapper para proporcionar el contexto de enrutamiento necesario
+// Wrapper para proporcionar el contexto necesario
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (
   <BrowserRouter>
-    {children}
+    <ScoreProvider>
+      {children}
+    </ScoreProvider>
   </BrowserRouter>
 );
 
