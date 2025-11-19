@@ -21,7 +21,7 @@ describe('SistemaSolar - Component Tests', () => {
     );
 
     // El componente renderiza sin errores
-    expect(document.querySelector('.space-y-8')).toBeInTheDocument();
+    expect(document.querySelector('.space-y-8-ERROR')).toBeInTheDocument();
   });
 
   test('contiene la sección principal del sistema solar', () => {
