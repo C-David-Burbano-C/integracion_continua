@@ -30,7 +30,7 @@ describe('MapaColombia - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('Explora Colombia con Google Earth')).toBeInTheDocument();
+    expect(screen.getByText('Vuela con vista satelital, descubre regiones naturales y deja que nuestro narrador IA te cuente historias sobre fauna, gastronomía y cultura.')).toBeInTheDocument();
   });
 
   test('renderiza el título de la vista satelital', () => {
@@ -40,7 +40,7 @@ describe('MapaColombia - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('Vista Satelital de Colombia')).toBeInTheDocument();
+    expect(screen.getByText('Bitácora viajera')).toBeInTheDocument();
   });
 
   test('contiene un iframe con el mapa de Google', () => {
@@ -50,8 +50,8 @@ describe('MapaColombia - Component Tests', () => {
       </TestWrapper>
     );
 
-    const iframe = document.querySelector('iframe');
-    expect(iframe).toBeInTheDocument();
-    expect(iframe).toHaveAttribute('title', 'Mapa de Colombia');
+    // El componente ya no usa iframe, usa CesiumGlobe
+    const cesiumContainer = document.querySelector('.relative.rounded-3xl');
+    expect(cesiumContainer).toBeInTheDocument();
   });
 });

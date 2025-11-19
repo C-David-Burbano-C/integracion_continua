@@ -2,7 +2,7 @@ import { useMemo, useState, useCallback } from 'react';
 import { MapIcon } from '../components/icons';
 import { useNarrator } from '../hooks/useNarrator';
 import { getRandomColombiaCuriosity, getCuriositiesByCategory, type ColombiaCuriosity } from '../data/colombiaCuriosities';
-import { MicrophoneIcon, StarIcon, SpeakerIcon, DiceIcon, StopIcon, LightbulbIcon } from '../components/icons/NarratorIcons';
+import { StarIcon, SpeakerIcon, DiceIcon, StopIcon, LightbulbIcon } from '../components/icons/NarratorIcons';
 import { useScore } from '../context/ScoreContext';
 
 const colombiaHeroStats = [

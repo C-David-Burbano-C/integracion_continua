@@ -27,7 +27,6 @@ export default function CesiumGlobe({ kmlUrl = '/assets/earth/globo-terraqueo.km
 
     const viewer = new Cesium.Viewer(cesiumContainer.current, {
       terrainProvider: undefined,
-      imageryProvider: false as unknown as Cesium.ImageryProvider,
       baseLayerPicker: false,
       geocoder: true,
       homeButton: true,

@@ -32,7 +32,7 @@ describe('SimulacionRobots - Component Tests', () => {
     );
 
     const section = document.querySelector('section');
-    expect(section).toHaveClass('min-h-screen', 'bg-gradient-to-br');
+    expect(section).toHaveClass('min-h-screen', 'bg-gradient-to-b');
   });
 
   test('renderiza el contenedor principal', () => {
@@ -42,7 +42,7 @@ describe('SimulacionRobots - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(document.querySelector('.container')).toBeInTheDocument();
+    expect(document.querySelector('.mx-auto')).toBeInTheDocument();
   });
 
   test('contiene el componente RobotSimulator', () => {
@@ -53,6 +53,6 @@ describe('SimulacionRobots - Component Tests', () => {
     );
 
     // Verifica que se renderiza el componente hijo
-    expect(document.querySelector('.container .mx-auto')).toBeTruthy();
+    expect(document.querySelector('.relative.rounded-3xl')).toBeTruthy();
   });
 });

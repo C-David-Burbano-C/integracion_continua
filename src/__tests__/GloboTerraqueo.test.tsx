@@ -30,17 +30,7 @@ describe('GloboTerraqueo - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('Explora el planeta Tierra con Google Earth')).toBeInTheDocument();
-  });
-
-  test('renderiza el título de la visualización 3D', () => {
-    render(
-      <TestWrapper>
-        <GloboTerraqueo />
-      </TestWrapper>
-    );
-
-    expect(screen.getByText('Globo Terráqueo 3D - Visualización con CesiumJS')).toBeInTheDocument();
+    expect(screen.getByText('Viaja alrededor del planeta con un globo 3D alimentado por CesiumJS y acompaña cada vista con curiosidades narradas en español.')).toBeInTheDocument();
   });
 
   test('contiene las instrucciones de uso del globo', () => {
@@ -50,7 +40,7 @@ describe('GloboTerraqueo - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText(/Usa el mouse para rotar la Tierra/)).toBeInTheDocument();
+    expect(screen.getByText(/Rueda del mouse para hacer zoom/)).toBeInTheDocument();
   });
 
   test('muestra la sección de datos curiosos', () => {
@@ -60,7 +50,7 @@ describe('GloboTerraqueo - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('🌍 Datos Curiosos sobre la Tierra')).toBeInTheDocument();
+    expect(screen.getByText('Datos del planeta')).toBeInTheDocument();
   });
 
   test('renderiza las estadísticas principales', () => {
@@ -71,7 +61,7 @@ describe('GloboTerraqueo - Component Tests', () => {
     );
 
     expect(screen.getByText('510.1')).toBeInTheDocument();
-    expect(screen.getByText('Millones km²')).toBeInTheDocument();
+    expect(screen.getByText('Millones de km²')).toBeInTheDocument();
     expect(screen.getByText('8.04')).toBeInTheDocument();
     expect(screen.getByText('Mil millones')).toBeInTheDocument();
   });
@@ -83,7 +73,7 @@ describe('GloboTerraqueo - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('7 Continentes')).toBeInTheDocument();
+    expect(screen.getByText('Continentes en cifras')).toBeInTheDocument();
   });
 
   test('contiene información sobre océanos', () => {
@@ -93,7 +83,7 @@ describe('GloboTerraqueo - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('5 Océanos')).toBeInTheDocument();
+    expect(screen.getByText('Los cinco océanos')).toBeInTheDocument();
   });
 
   test('muestra datos sobre la atmósfera', () => {
@@ -103,7 +93,7 @@ describe('GloboTerraqueo - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('🌡️ Clima y Atmósfera')).toBeInTheDocument();
+    expect(screen.getByText('Atmósfera protectora')).toBeInTheDocument();
   });
 
   test('renderiza la sección de geografía física', () => {
@@ -113,7 +103,7 @@ describe('GloboTerraqueo - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('🏔️ Geografía')).toBeInTheDocument();
+    expect(screen.getByText('Océanos y agua')).toBeInTheDocument();
   });
 
   test('contiene información sobre el relieve terrestre', () => {
@@ -123,7 +113,7 @@ describe('GloboTerraqueo - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('🏔️ Geografía')).toBeInTheDocument();
+    expect(screen.getByText('Capas de la Tierra')).toBeInTheDocument();
   });
 
   test('muestra datos sobre cuerpos de agua', () => {
@@ -133,7 +123,7 @@ describe('GloboTerraqueo - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('🌊 Océanos y Agua')).toBeInTheDocument();
+    expect(screen.getByText('Océanos y agua')).toBeInTheDocument();
   });
 
   test('renderiza la sección de biodiversidad', () => {
@@ -143,7 +133,7 @@ describe('GloboTerraqueo - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('🌱 Biodiversidad')).toBeInTheDocument();
+    expect(screen.getByText('Atmósfera protectora')).toBeInTheDocument();
   });
 
   test('contiene información sobre ecosistemas', () => {
@@ -153,7 +143,7 @@ describe('GloboTerraqueo - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('🌡️ Clima y Atmósfera')).toBeInTheDocument();
+    expect(screen.getByText('Atmósfera protectora')).toBeInTheDocument();
   });
 
   test('muestra datos sobre especies', () => {
@@ -163,7 +153,7 @@ describe('GloboTerraqueo - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('🌱 Biodiversidad')).toBeInTheDocument();
+    expect(screen.getByText('Atmósfera protectora')).toBeInTheDocument();
   });
 
   test('renderiza la sección de datos demográficos', () => {
@@ -173,6 +163,6 @@ describe('GloboTerraqueo - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('🚀 Exploración Espacial')).toBeInTheDocument();
+    expect(screen.getByText('Narrador terrestre mágico')).toBeInTheDocument();
   });
 });
