@@ -3,9 +3,16 @@ import js from "@eslint/js";
 import tsParser from "@typescript-eslint/parser";
 
 export default [
-  // Ignorar directorios de build y dependencias
+  // Ignorar directorios de build, dependencias y assets externos
   {
-    ignores: ["dist/**", "node_modules/**", "coverage/**"],
+    ignores: [
+      "dist/**",
+      "node_modules/**",
+      "coverage/**",
+      "public/assets/**", // Ignorar assets externos como Cesium
+      "src/assets/**",    // Ignorar assets en src
+      "**/*.min.js",      // Ignorar archivos minificados
+    ],
   },
 
   // Reglas base recomendadas de ESLint para JS/TS
@@ -43,6 +50,26 @@ export default [
         SpeechSynthesisVoice: "readonly",
         SpeechSynthesisUtterance: "readonly",
         React: "readonly",
+        // Cesium.js globals
+        setTimeout: "readonly",
+        clearTimeout: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
+        FileReader: "readonly",
+        XMLHttpRequest: "readonly",
+        WebGLRenderingContext: "readonly",
+        Image: "readonly",
+        Canvas: "readonly",
+        navigator: "readonly",
+        location: "readonly",
+        history: "readonly",
+        performance: "readonly",
+        URL: "readonly",
+        Blob: "readonly",
+        ArrayBuffer: "readonly",
+        Uint8Array: "readonly",
+        Float32Array: "readonly",
+        Float64Array: "readonly",
       },
     },
     rules: {

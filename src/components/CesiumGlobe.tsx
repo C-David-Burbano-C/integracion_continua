@@ -10,9 +10,7 @@ export default function CesiumGlobe({ kmlUrl = '/assets/earth/globo-terraqueo.km
   const cesiumContainer = useRef<HTMLDivElement>(null);
   const viewerRef = useRef<Cesium.Viewer | null>(null);
   const doubleClickHandlerRef = useRef<Cesium.ScreenSpaceEventHandler | null>(null);
-  const buildModuleUrl = Cesium.buildModuleUrl as typeof Cesium.buildModuleUrl & {
-    setBaseUrl?: (baseUrl: string) => void;
-  };
+  const buildModuleUrl = Cesium.buildModuleUrl;
 
   useEffect(() => {
     if (!cesiumContainer.current) return undefined;
@@ -20,9 +18,6 @@ export default function CesiumGlobe({ kmlUrl = '/assets/earth/globo-terraqueo.km
     let isDisposed = false;
 
     (window as any).CESIUM_BASE_URL = '/assets/cesium';
-    if (typeof buildModuleUrl.setBaseUrl === 'function') {
-      buildModuleUrl.setBaseUrl('/assets/cesium/');
-    }
     Cesium.Ion.defaultAccessToken = undefined as unknown as string;
 
     const viewer = new Cesium.Viewer(cesiumContainer.current, {
