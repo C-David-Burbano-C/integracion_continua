@@ -17,7 +17,7 @@ describe('ScoreDisplay', () => {
     renderWithProvider(<ScoreDisplay />);
 
     expect(screen.getByText('0')).toBeInTheDocument();
-    expect(screen.getByText('puntos ERROR')).toBeInTheDocument();
+    expect(screen.getByText('puntos')).toBeInTheDocument();
   });
 
   test('debe mostrar el puntaje actualizado cuando cambia', () => {
