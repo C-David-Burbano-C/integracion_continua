@@ -20,7 +20,7 @@ describe('MapaColombia - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('Mapa Interactivo de Colombia ERROR')).toBeInTheDocument();
+    expect(screen.getByText('Mapa Interactivo de Colombia')).toBeInTheDocument();
   });
 
   test('muestra la descripción del componente', () => {
