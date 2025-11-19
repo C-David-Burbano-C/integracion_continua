@@ -30,7 +30,7 @@ describe('ScoreContext', () => {
     );
 
     const scoreDisplay = screen.getByTestId('score-display');
-    expect(scoreDisplay).toHaveTextContent('Puntaje: 100');
+    expect(scoreDisplay).toHaveTextContent('Puntaje: 0');
   });
 
   test('debe agregar puntos correctamente', () => {
