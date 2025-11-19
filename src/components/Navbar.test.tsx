@@ -16,7 +16,7 @@ describe("Navbar - Renderizado", () => {
         <Navbar />
       </ScoreProvider>
     );
-    expect(screen.getByText(/UCC : Prácticas Desarrollo/i)).toBeInTheDocument();
+    expect(screen.getByText(/UCC : Prácticas Desarrollo ERROR/i)).toBeInTheDocument();
   });
 
   test("renderiza el logo con la letra 'U'", () => {
