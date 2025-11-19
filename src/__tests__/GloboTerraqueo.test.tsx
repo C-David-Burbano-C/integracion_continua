@@ -20,7 +20,7 @@ describe('GloboTerraqueo - Component Tests', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('Globo Terráqueo Interactivo ERROR')).toBeInTheDocument();
+    expect(screen.getByText('Globo Terráqueo Interactivo')).toBeInTheDocument();
   });
 
   test('muestra la descripción del componente', () => {
